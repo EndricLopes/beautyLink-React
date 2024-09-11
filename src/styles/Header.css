@@ -1,0 +1,23 @@
+/* src/styles/Header.css */
+
+/* Aumenta a altura do header */
+.navbar {
+  height: 80px; /* Aumente conforme necessário */
+  font-size: 1.2rem; /* Aumenta o tamanho do texto */
+}
+
+/* Aumenta o tamanho da marca/Brand */
+.navbar-brand {
+  font-size: 1.5rem; /* Ajuste o tamanho do texto da marca */
+  font-weight: bold; /* Torna o texto da marca mais robusto */
+}
+
+/* Aumenta o tamanho dos links de navegação */
+.nav-link {
+  font-size: 1.2rem; /* Aumenta o tamanho do texto nos links */
+}
+
+/* Ajusta o tamanho do dropdown */
+.navbar-nav .nav-item .dropdown-menu {
+  font-size: 1.3rem; /* Aumenta o tamanho do texto do dropdown */
+}
