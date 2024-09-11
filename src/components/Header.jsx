@@ -1,18 +1,26 @@
-Header: import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// src/components/Header.js
+import '../styles/Header.css'; // Importa o CSS do cabeçalho
+import { useNavigate } from 'react-router-dom';
 
-function Header() {
+const Header = () => {
+  const navigate = useNavigate();
+
+  const linkLogin = () => {
+    navigate('/Login');
+  };
+
   return (
-    <header className="bg-info fixed-top">
-      <nav className="navbar navbar-expand-lg navbar-light container">
-        <div className="navbar-nav mx-auto">
-          <button className="btn btn-link nav-item nav-link text-white">Home</button>
-          <button className="btn btn-link nav-item nav-link text-white">Sobre</button>
-          <button className="btn btn-link nav-item nav-link text-white">Contato</button>
-        </div>
+    <header className="header">
+      <nav>
+        <button className="nav-button">Sobre</button>
+        <button className="nav-button">Agendamentos</button>
+        <button className="nav-button">Equipes</button>
+        <button className="nav-button">Contato</button>
+        <button className="nav-button" onClick={linkLogin}>Login</button>
+        <button className="nav-button">Cadastro</button>
       </nav>
     </header>
   );
-}
+};
 
 export default Header;
