@@ -2,6 +2,7 @@ import './styles/Styles.css';
 import { Outlet } from 'react-router-dom'
 import { useState} from 'react'
 import { UserContext } from './components/Pages/UserContext'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [user, setUser] = useState(null);
