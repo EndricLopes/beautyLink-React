@@ -43,7 +43,7 @@ const Slider = () => {
         ))}
       </div>
       <div className="info-overlay">
-        <h2>Conecte-se com Sua Estética</h2>
+        <h2>Conecte-se com Sua Estética111</h2>
         <p>Agende seu atendimento com nossos especialistas e descubra o melhor para você.</p>
         <button>Agende agora</button>
       </div>
