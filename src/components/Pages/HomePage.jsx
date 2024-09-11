@@ -5,7 +5,6 @@ import '../../styles/Header.css'; // Importa o CSS do cabeçalho
 import '../../styles/Home.css'; // Importa o CSS específico da HomePage
 
 // Importa a imagem como uma variável
-import fundoImagem from '../Imagens/mulherGrande.png';
 
 // Slider Component
 const Slider = () => {
@@ -73,11 +72,6 @@ const HomePage = () => {
     <div className="home-page">
       <Header />
       <main className="main-content">
-        <img
-          src={fundoImagem} // Usa a variável para a imagem
-          alt="Fundo"
-          className="background-image"
-        />
         <Slider />
         <ProductBar />
       </main>

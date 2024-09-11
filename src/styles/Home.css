@@ -4,15 +4,10 @@ html, body {
     padding: 0;
     height: 100%;
     overflow: hidden;
-  }
-  
-  .background-image {
-    position: absolute;
-    top: 65;
-    left: -1118px;
-    width: 100vw; /* Ocupa toda a largura da tela */
-    height: 100vh; /* Ocupa toda a altura da tela */
-    object-fit: cover; /* Ajusta a imagem para cobrir a tela mantendo a proporção */
+    background-image: url('../components/Imagens/mulherMedia.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
   }
   
   /* src/styles/HomePage.css */
