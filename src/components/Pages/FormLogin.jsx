@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -22,7 +23,8 @@ function FormLogin() {
 
         if (!usuario || !senha) {
             window.alert('Por favor, insira o usuário e a senha.');
-            return; }
+            return;
+        }
 
         axios.post('https://beauty-link-python.vercel.app/Login', {
             usuario: usuario,
@@ -39,45 +41,53 @@ function FormLogin() {
             console.error('Erro ao fazer login:', error);
             window.alert('Usuario ou senha incorretos. Por favor, tente novamente.');
         });
-    }
+    };
 
     const handleCadastro = () => {
-        console.log("Usuário não possui cadastro")
+        console.log("Usuário não possui cadastro");
         return navigate("/Cadastro");
-    }
+    };
 
-    return(
-        <div className="wrap-login">
-            <h1 className="login-form-title">Tela de Login</h1>
-            <form onSubmit={Logar}>
-                <div>
-                    <label className="title-label-usuario" htmlFor="usuario">Usuario: </label>
-
-                    <input className="input" type="text"
-                    id="usuario" 
-                    name="usuario" 
-                    placeholder="Crie seu nome de usuario"
-                    onChange={(e) => setUsuario(e.target.value)} />
-                </div>
-                <div>
-                    <label className="title-label-senha" htmlFor="password">Senha: </label>
-
-                    <input className="input" type="password"
-                    id="password"
-                    name="password" 
-                    placeholder="Crie sua senha"
-                    onChange={(e) => setPassword(e.target.value)} />
-                </div>
-                <div>
-                    <input className="style-entrar" type="submit" value="Entrar" />
-                </div>
-                <div>
-                    <p className="style-pergunta">Ainda não possui cadastro?</p>
-                    <button className="style-criar-cadastro" onClick={handleCadastro}>Criar Cadastro</button>
-                </div>
-            </form>
-        </div >
-    )
+    return (
+        <div className="d-flex justify-content-center align-items-center vh-100 bg-dark">
+            <div className="card p-4" style={{ width: '400px' }}>
+                <h1 className="login-form-title text-center mb-4">Tela de Login</h1>
+                <form onSubmit={Logar}>
+                    <div className="form-group mb-3">
+                        <label className="form-label" htmlFor="usuario">Usuário:</label>
+                        <input
+                            className="form-control"
+                            type="text"
+                            id="usuario"
+                            name="usuario"
+                            placeholder="Crie seu nome de usuário"
+                            onChange={(e) => setUsuario(e.target.value)}
+                        />
+                    </div>
+                    <div className="form-group mb-3">
+                        <label className="form-label" htmlFor="password">Senha:</label>
+                        <input
+                            className="form-control"
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Crie sua senha"
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    <div className="d-grid">
+                        <button className="btn btn-primary" type="submit">Entrar</button>
+                    </div>
+                    <div className="text-center mt-3">
+                        <p>Ainda não possui cadastro?</p>
+                        <button type="button" className="btn btn-secondary" onClick={handleCadastro}>
+                            Criar Cadastro
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
 }
 
 export default FormLogin;
