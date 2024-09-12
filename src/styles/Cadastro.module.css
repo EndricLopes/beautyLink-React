@@ -1,0 +1,56 @@
+/* Cadastro.module.css */
+.body {
+    background: linear-gradient(90deg, rgb(84, 45, 134) 0%, rgb(100, 53, 163) 35%, rgba(0,212,255,1) 100%);
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.card {
+    width: 100%;
+    max-width: 556px !important;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-control {
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+    border-radius: 4px 4px 0 0;
+    box-shadow: none !important;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.btn-primary {
+    width: 100%;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(75,14,154,1) 35%, rgba(0,212,255,1) 100%);
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.btn-secondary {
+    width: 100%;
+    border: none;
+    border-radius: 50px;
+    background-color: grey;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.text-center {
+    text-align: center;
+}
