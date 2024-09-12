@@ -57,3 +57,25 @@
     padding: 10px;
     background: #e9ecef;
 }
+
+.calendario {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* Ajuste conforme o layout desejado */
+    gap: 5px;
+    margin-top: 20px; /* Adicione espaço acima do calendário */
+}
+
+.diaNormal {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.diaOcupado {
+    background-color: red;
+    color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
