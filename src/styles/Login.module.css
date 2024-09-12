@@ -1,5 +1,22 @@
+/* src/styles/Login.module.css */
+.body {
+    background: linear-gradient(90deg, rgb(84, 45, 134) 0%, rgb(100, 53, 163) 35%, rgba(0,212,255,1) 100%);
+    font-family: 'Poppins', sans-serif;
+}
 
-/* src/styles/Login.css */
+
+h4 {
+    font-size: 2rem !important;
+    font-weight: 700;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .customForm {
+        width: 100% !important;
+    }
+}
+
 
 .btn-primary {
     width: 100%;

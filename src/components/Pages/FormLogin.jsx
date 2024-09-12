@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../../styles/Login.css'; // Importa o CSS personalizado
+import styles from '../../styles/Login.module.css'; // Atualize para importar CSS Module
 import { UserContext } from './UserContext';
 
 function FormLogin() {
@@ -48,43 +48,47 @@ function FormLogin() {
     }
 
     return (
-        <div className="d-flex justify-content-center align-items-center min-vh-100">
-            <form onSubmit={Logar} className="custom-form">
-                <h4 className="text-center mb-4">Tela de Login</h4>
-                <div className="mb-3">
-                    <label className="form-label" htmlFor="usuario">Usuário:</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="usuario"
-                        name="usuario"
-                        placeholder="Crie seu nome de usuário"
-                        value={usuario}
-                        onChange={(e) => setUsuario(e.target.value)}
-                        required
-                    />
+        <div className={styles.body}> {/* Use a classe do CSS Module */}
+            <div className="container d-flex justify-content-center align-items-center min-vh-100">
+                <div className="card p-4" style={{ width: '100%', maxWidth: '400px' }}>
+                    <h1 className="text-center mb-4">Tela de Login</h1>
+                    <form onSubmit={Logar}>
+                        <div className="mb-3">
+                            <label className="form-label" htmlFor="usuario">Usuário:</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="usuario"
+                                name="usuario"
+                                placeholder="Crie seu nome de usuário"
+                                value={usuario}
+                                onChange={(e) => setUsuario(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label" htmlFor="password">Senha:</label>
+                            <input
+                                type="password"
+                                className="form-control"
+                                id="password"
+                                name="password"
+                                placeholder="Crie sua senha"
+                                value={senha}
+                                onChange={(e) => setSenha(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <button type="submit" className="btn btn-primary w-100">Entrar</button>
+                        <div className="mt-3 text-center">
+                            <p className="mb-0">Ainda não possui cadastro?</p>
+                            <button type="button" className="btn btn-secondary mt-2" onClick={handleCadastro}>
+                                Criar Cadastro
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <div className="mb-3">
-                    <label className="form-label" htmlFor="password">Senha:</label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        id="password"
-                        name="password"
-                        placeholder="Crie sua senha"
-                        value={senha}
-                        onChange={(e) => setSenha(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit" className="btn btn-primary">Entrar</button>
-                <div className="mt-3 text-center">
-                    <p className="mb-0">Ainda não possui cadastro?</p>
-                    <button type="button" className="btn btn-secondary mt-2" onClick={handleCadastro}>
-                        Criar Cadastro
-                    </button>
-                </div>
-            </form>
+            </div>
         </div>
     );
 }
