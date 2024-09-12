@@ -53,10 +53,6 @@ function FormAgenda() {
         .catch(error => console.error('Erro ao buscar atendimentos:', error));
     }, [tipoServico]);
 
-    const linkLogin = () => {
-        navigate('/');
-    };
-
     const AgendarAtendimento = (e) => {
         e.preventDefault();
 
@@ -180,11 +176,6 @@ function FormAgenda() {
 
                         <div className="container__ponto__button">
                             <button type="submit" className="btn btn-primary w-100">Confirmar Agendamento</button>
-                        </div>
-
-                        <div className="mt-3 text-center">
-                            <p className="mb-0">Deseja ir para a página de login?</p>
-                            <button type="button" className="btn btn-secondary w-100" onClick={linkLogin}>Login</button>
                         </div>
                     </form>
                 </div>
