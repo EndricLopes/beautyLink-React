@@ -134,18 +134,6 @@ function FormAgenda() {
                                 readOnly
                             />
                         </div>
-
-                        <div className="mb-3">
-                            <label className="form-label" htmlFor="statusAgendamento">Status do Agendamento:</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="statusAgendamento"
-                                value={statusAgendamento}
-                                readOnly
-                            />
-                        </div>
-
                         <div className="mb-3">
                             <label className="form-label" htmlFor="observacao">Observação:</label>
                             <textarea

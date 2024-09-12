@@ -1,7 +1,13 @@
 /* Exemplo de estilos para manter a consistência com a página de login */
 
+/* Cadastro.module.css */
 .body {
-    background: #f8f9fa; /* Ajuste conforme necessário */
+    background: linear-gradient(90deg, rgb(84, 45, 134) 0%, rgb(100, 53, 163) 35%, rgba(0,212,255,1) 100%);
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 20px;
 }
 

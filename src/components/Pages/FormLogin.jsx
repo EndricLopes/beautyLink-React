@@ -51,7 +51,7 @@ function FormLogin() {
         <div className={styles.body}> {/* Use a classe do CSS Module */}
             <div className="container d-flex justify-content-center align-items-center min-vh-100">
                 <div className="card p-4" style={{ width: '100%', maxWidth: '400px' }}>
-                    <h1 className="text-center mb-4">Tela de Login</h1>
+                    <h1 className="text-center mb-4">Login</h1>
                     <form onSubmit={Logar}>
                         <div className="mb-3">
                             <label className="form-label" htmlFor="usuario">Usuário:</label>

@@ -31,7 +31,7 @@ function Cadastro() {
     <div className={styles.body}> {/* Utilize a classe de estilo CSS Module */}
       <div className="container d-flex justify-content-center align-items-center min-vh-100">
         <div className={`card p-4 ${styles.card}`} style={{ width: '100%', maxWidth: '400px' }}>
-          <h1 className="text-center mb-4">Tela Cadastro</h1>
+          <h1 className="text-center mb-4">Cadastro</h1>
           <form>
             <div className="mb-3">
               <label className="form-label" htmlFor="name">Nome:</label>
