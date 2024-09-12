@@ -21,3 +21,16 @@
 .navbar-nav .nav-item .dropdown-menu {
   font-size: 1.1rem; /* Aumenta o tamanho do texto do dropdown */
 }
+
+/* src/styles/Header.css */
+
+/* Estilo para os itens do dropdown */
+.dropdown-menu .dropdown-item {
+  color: black !important; /* Força a cor preta para os itens do dropdown */
+}
+
+/* Mantém a cor preta ao passar o mouse */
+.dropdown-menu .dropdown-item:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Adiciona um leve efeito ao passar o mouse */
+  color: black !important; /* Garante que a cor preta permaneça no hover */
+}

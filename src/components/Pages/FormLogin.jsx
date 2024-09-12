@@ -1,13 +1,13 @@
 import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../../styles/Styles.css';
+import '../../styles/Login.css'; // Importa o CSS personalizado
 import { UserContext } from './UserContext';
 
 function FormLogin() {
     const { setUser } = useContext(UserContext);
     const [usuario, setUsuario] = useState('');
-    const [senha, setPassword] = useState('');
+    const [senha, setSenha] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,7 +22,8 @@ function FormLogin() {
 
         if (!usuario || !senha) {
             window.alert('Por favor, insira o usuário e a senha.');
-            return; }
+            return;
+        }
 
         axios.post('https://beauty-link-python.vercel.app/Login', {
             usuario: usuario,
@@ -31,53 +32,61 @@ function FormLogin() {
         .then((response) => {
             console.log(response.data.message);
             setUser(usuario);
-            console.log('usuario definido:', usuario);
+            console.log('Usuário definido:', usuario);
             localStorage.setItem('user', usuario);
             navigate("/Ponto");
         })
         .catch((error) => {
             console.error('Erro ao fazer login:', error);
-            window.alert('Usuario ou senha incorretos. Por favor, tente novamente.');
+            window.alert('Usuário ou senha incorretos. Por favor, tente novamente.');
         });
     }
 
     const handleCadastro = () => {
-        console.log("Usuário não possui cadastro")
-        return navigate("/Cadastro");
+        console.log("Usuário não possui cadastro");
+        navigate("/Cadastro");
     }
 
-    return(
-        <div className="wrap-login">
-            <h1 className="login-form-title">Tela de Login</h1>
-            <form onSubmit={Logar}>
-                <div>
-                    <label className="title-label-usuario" htmlFor="usuario">Usuario: </label>
-
-                    <input className="input" type="text"
-                    id="usuario" 
-                    name="usuario" 
-                    placeholder="Crie seu nome de usuario"
-                    onChange={(e) => setUsuario(e.target.value)} />
+    return (
+        <div className="d-flex justify-content-center align-items-center min-vh-100">
+            <form onSubmit={Logar} className="custom-form">
+                <h4 className="text-center mb-4">Tela de Login</h4>
+                <div className="mb-3">
+                    <label className="form-label" htmlFor="usuario">Usuário:</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="usuario"
+                        name="usuario"
+                        placeholder="Crie seu nome de usuário"
+                        value={usuario}
+                        onChange={(e) => setUsuario(e.target.value)}
+                        required
+                    />
                 </div>
-                <div>
-                    <label className="title-label-senha" htmlFor="password">Senha: </label>
-
-                    <input className="input" type="password"
-                    id="password"
-                    name="password" 
-                    placeholder="Crie sua senha"
-                    onChange={(e) => setPassword(e.target.value)} />
+                <div className="mb-3">
+                    <label className="form-label" htmlFor="password">Senha:</label>
+                    <input
+                        type="password"
+                        className="form-control"
+                        id="password"
+                        name="password"
+                        placeholder="Crie sua senha"
+                        value={senha}
+                        onChange={(e) => setSenha(e.target.value)}
+                        required
+                    />
                 </div>
-                <div>
-                    <input className="style-entrar" type="submit" value="Entrar" />
-                </div>
-                <div>
-                    <p className="style-pergunta">Ainda não possui cadastro?</p>
-                    <button className="style-criar-cadastro" onClick={handleCadastro}>Criar Cadastro</button>
+                <button type="submit" className="btn btn-primary">Entrar</button>
+                <div className="mt-3 text-center">
+                    <p className="mb-0">Ainda não possui cadastro?</p>
+                    <button type="button" className="btn btn-secondary mt-2" onClick={handleCadastro}>
+                        Criar Cadastro
+                    </button>
                 </div>
             </form>
-        </div >
-    )
+        </div>
+    );
 }
 
 export default FormLogin;
