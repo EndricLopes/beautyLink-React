@@ -39,9 +39,9 @@ function FormAgenda() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log('Fetching atendimentos with tipo_servico:', tipoServico);
+        console.log('Fetching atendimentos with tipo_servico:', fkIdUsuarioCliente);
         axios.get('https://beauty-link-python.vercel.app/Atendimento', {
-            params: { tipo_servico: tipoServico }
+            params: { tipo_servico: fkIdUsuarioCliente }
         })
         .then(response => {
             console.log('Atendimentos fetched:', response.data);
@@ -50,7 +50,7 @@ function FormAgenda() {
         .catch(error => {
             console.error('Erro ao buscar atendimentos:', error.response ? error.response.data : error.message);
         });
-    }, [tipoServico]);
+    }, [fkIdUsuarioCliente]);
 
     const handleFuncionarioChange = (e) => {
         console.log('Funcionario selecionado:', e.target.value);
