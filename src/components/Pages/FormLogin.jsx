@@ -11,9 +11,19 @@ function FormLogin() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        // Diagnóstico
+        console.log('Tentando recuperar usuário do localStorage');
         const savedUser = localStorage.getItem('user');
         if (savedUser) {
-            setUser(JSON.parse(savedUser)); // Parse o JSON armazenado
+            try {
+                const parsedUser = JSON.parse(savedUser);
+                console.log('Usuário recuperado:', parsedUser);
+                setUser(parsedUser);
+            } catch (error) {
+                console.error('Erro ao analisar JSON do localStorage:', error);
+                // Limpando o item corrompido
+                localStorage.removeItem('user');
+            }
         }
     }, [setUser]);
 
@@ -30,14 +40,14 @@ function FormLogin() {
             senha: senha
         })
         .then((response) => {
-            console.log(response.data.message);
+            console.log('Resposta da API:', response.data);
             if (response.data.message === 'Login bem-sucedido') {
                 const userData = {
                     nome: usuario,
-                    id: response.data.id_usuario // Recebe o ID do usuário
+                    id: response.data.id_usuario
                 };
                 setUser(userData);
-                localStorage.setItem('user', JSON.stringify(userData)); // Armazena o objeto JSON
+                localStorage.setItem('user', JSON.stringify(userData));
                 navigate("/Ponto");
             } else {
                 window.alert('Usuário ou senha incorretos. Por favor, tente novamente.');
