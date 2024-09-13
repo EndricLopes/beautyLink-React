@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import styles from '../../styles/Login.module.css'; // Atualize para importar CSS Module
+import styles from '../../styles/Login.module.css';
 import { UserContext } from './UserContext';
 
 function FormLogin() {
@@ -11,9 +11,9 @@ function FormLogin() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const savedUser = JSON.parse(localStorage.getItem('user'));
+        const savedUser = localStorage.getItem('user');
         if (savedUser) {
-            setUser(savedUser);
+            setUser(JSON.parse(savedUser)); // Parse o JSON armazenado
         }
     }, [setUser]);
 
@@ -31,14 +31,17 @@ function FormLogin() {
         })
         .then((response) => {
             console.log(response.data.message);
-            const userData = {
-                nome: usuario,
-                id: response.data.id_usuario // Recebe o ID do usuário
-            };
-            setUser(userData);
-            console.log('Usuário definido:', userData);
-            localStorage.setItem('user', JSON.stringify(userData)); // Armazena o usuário e o ID no localStorage
-            navigate("/Ponto");
+            if (response.data.message === 'Login bem-sucedido') {
+                const userData = {
+                    nome: usuario,
+                    id: response.data.id_usuario // Recebe o ID do usuário
+                };
+                setUser(userData);
+                localStorage.setItem('user', JSON.stringify(userData)); // Armazena o objeto JSON
+                navigate("/Ponto");
+            } else {
+                window.alert('Usuário ou senha incorretos. Por favor, tente novamente.');
+            }
         })
         .catch((error) => {
             console.error('Erro ao fazer login:', error);
@@ -52,7 +55,7 @@ function FormLogin() {
     }
 
     return (
-        <div className={styles.body}> {/* Use a classe do CSS Module */}
+        <div className={styles.body}>
             <div className="container d-flex justify-content-center align-items-center min-vh-100">
                 <div className="card p-4" style={{ width: '100%', maxWidth: '400px' }}>
                     <h1 className="text-center mb-4">Login</h1>
