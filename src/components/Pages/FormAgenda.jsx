@@ -39,19 +39,25 @@ function FormAgenda() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Buscar os atendimentos
+        console.log('Fetching atendimentos with tipo_servico:', tipoServico);
         axios.get('https://beauty-link-python.vercel.app/Atendimento', {
             params: { tipo_servico: tipoServico }
         })
-        .then(response => setAtendimentos(response.data))
-        .catch(error => console.error('Erro ao buscar atendimentos:', error));
+        .then(response => {
+            console.log('Atendimentos fetched:', response.data);
+            setAtendimentos(response.data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar atendimentos:', error.response ? error.response.data : error.message);
+        });
     }, [tipoServico]);
 
     const handleFuncionarioChange = (e) => {
+        console.log('Funcionario selecionado:', e.target.value);
         setFkIdFuncionario(e.target.value);
     };
 
-    const AgendarAtendimento = (e) => {
+    const AgendarAtendimento = async (e) => {
         e.preventDefault();
 
         // Log dos valores que serão enviados
@@ -63,29 +69,30 @@ function FormAgenda() {
         console.log("ID do Funcionário:", fkIdFuncionario);
         console.log("ID do Usuário Cliente:", fkIdUsuarioCliente);
 
-        axios.post('https://beauty-link-python.vercel.app/Ponto', {
-            tipo_servico: tipoServico,
-            data_atendimento: dataAtendimento,
-            data_marcacao: dataMarcacao,
-            status_agendamento: statusAgendamento,
-            observacao: observacao,
-            fk_id_funcionario: fkIdFuncionario,
-            fk_id_usuario_cliente: fkIdUsuarioCliente
-        },)
-        .then((response) => {
-            console.log(response.data.message);
+        try {
+            const response = await axios.post('https://beauty-link-python.vercel.app/Ponto', {
+                tipo_servico: tipoServico,
+                data_atendimento: dataAtendimento,
+                data_marcacao: dataMarcacao,
+                status_agendamento: statusAgendamento,
+                observacao: observacao,
+                fk_id_funcionario: fkIdFuncionario,
+                fk_id_usuario_cliente: fkIdUsuarioCliente
+            });
+
+            console.log('Resposta da API:', response.data);
             if (response.data.message === 'Atendimento cadastrado com sucesso') {
                 window.alert('Atendimento cadastrado com sucesso!');
                 navigate('/');
             }
-        })
-        .catch((error) => {
-            console.error('Erro ao cadastrar atendimento:', error);
+        } catch (error) {
+            console.error('Erro ao cadastrar atendimento:', error.response ? error.response.data : error.message);
             window.alert('Erro ao cadastrar atendimento. Por favor, tente novamente.');
-        });
+        }
     };
 
     const isDiaOcupado = (data) => {
+        console.log('Verificando se o dia está ocupado:', data);
         return atendimentos.some(atendimento => atendimento.DATA_ATENDIMENTO === data);
     };
 
@@ -173,7 +180,7 @@ function FormAgenda() {
 
             <div className={styles.calendario}>
                 {Array.from({ length: 30 }, (_, i) => {
-                    const dia = `2024-09-${i + 1}`;
+                    const dia = `2024-09-${(i + 1).toString().padStart(2, '0')}`;
                     return (
                         <div
                             key={i}
