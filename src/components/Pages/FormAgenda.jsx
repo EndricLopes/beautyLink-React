@@ -50,7 +50,12 @@ function FormAgenda() {
 
     const handleFuncionarioChange = (e) => {
         const selectedFuncionario = e.target.value;
-        setFkIdFuncionario(selectedFuncionario === 'Braian' ? 5 : selectedFuncionario);
+
+        // Definindo o ID correto de acordo com o funcionário selecionado
+        const funcionarioId = selectedFuncionario === 'Braian' ? 1 :
+                              selectedFuncionario === 'Lukas' ? 2 : 3;
+
+        setFkIdFuncionario(funcionarioId); // Atualiza o ID do funcionário
         setLabelFuncionario(selectedFuncionario); // Atualiza a label com o nome selecionado
     };
 
@@ -63,7 +68,7 @@ function FormAgenda() {
             data_marcacao: dataMarcacao,
             status_agendamento: statusAgendamento,
             observacao: observacao,
-            fk_id_funcionario: fkIdFuncionario,
+            fk_id_funcionario: fkIdFuncionario, // Enviando o ID correto
             fk_id_usuario_cliente: fkIdUsuarioCliente
         }, {
             withCredentials: true
@@ -151,10 +156,7 @@ function FormAgenda() {
                                 className="form-control"
                                 id="fkIdFuncionario"
                                 value={fkIdFuncionario}
-                                onChange={(e) => {
-                                    handleFuncionarioChange(e); // Atualiza o nome na label
-                                    setFkIdFuncionario(e.target.value); // Atualiza o valor do funcionário
-                                }}
+                                onChange={handleFuncionarioChange} // Chama apenas o handleFuncionarioChange
                                 required
                             >
                                 <option value="">Selecione um funcionário</option>
