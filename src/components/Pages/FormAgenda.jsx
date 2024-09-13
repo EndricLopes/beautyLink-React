@@ -54,6 +54,15 @@ function FormAgenda() {
     const AgendarAtendimento = (e) => {
         e.preventDefault();
 
+            // Log dos valores que serão enviados
+    console.log("Tipo de Serviço:", tipoServico);
+    console.log("Data do Atendimento:", dataAtendimento);
+    console.log("Data da Marcação:", dataMarcacao);
+    console.log("Status do Agendamento:", statusAgendamento);
+    console.log("Observação:", observacao);
+    console.log("ID do Funcionário:", fkIdFuncionario);
+    console.log("ID do Usuário Cliente:", fkIdUsuarioCliente);
+
         axios.post('https://beauty-link-python.vercel.app/CadastroAtendimento', {
             tipo_servico: tipoServico,
             data_atendimento: dataAtendimento,
