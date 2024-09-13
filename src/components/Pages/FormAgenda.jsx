@@ -1,13 +1,13 @@
 import { useContext, useState, useEffect } from 'react';
-import PropTypes from 'prop-types'; // Adicione esta linha
+import PropTypes from 'prop-types';
 import { UserContext } from './UserContext';
 import axios from 'axios';
-import styles from '../../styles/Agenda.module.css'; // Atualize para importar o CSS Module
+import styles from '../../styles/Agenda.module.css';
 import { useNavigate } from 'react-router-dom';
 
 function ConfirmAcao({ mensagem, onConfirm, onCancel }) {
     return (
-        <div className={styles.alertConfirm}> {/* Use a classe do CSS Module */}
+        <div className={styles.alertConfirm}>
             <div className={styles.modalContent}>
                 <p>{mensagem}</p>
                 <div className={styles.buttonContainer}>
@@ -28,7 +28,6 @@ ConfirmAcao.propTypes = {
 function FormAgenda() {
     const { user } = useContext(UserContext);
     const [mostrarModal, setMostrarModal] = useState(false);
-    const [funcionarios, setFuncionarios] = useState([]);
     const [atendimentos, setAtendimentos] = useState([]);
     const [tipoServico, setTipoServico] = useState('');
     const [dataAtendimento, setDataAtendimento] = useState('');
@@ -40,11 +39,6 @@ function FormAgenda() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Buscar os funcionários
-        axios.get('https://beauty-link-python.vercel.app/Funcionarios')
-            .then(response => setFuncionarios(response.data))
-            .catch(error => console.error('Erro ao buscar funcionários:', error));
-
         // Buscar os atendimentos
         axios.get('https://beauty-link-python.vercel.app/Atendimentos', {
             params: { tipo_servico: tipoServico }
@@ -52,6 +46,11 @@ function FormAgenda() {
         .then(response => setAtendimentos(response.data))
         .catch(error => console.error('Erro ao buscar atendimentos:', error));
     }, [tipoServico]);
+
+    const handleFuncionarioChange = (e) => {
+        const selectedFuncionario = e.target.value;
+        setFkIdFuncionario(selectedFuncionario === 'Braian' ? 5 : selectedFuncionario);
+    };
 
     const AgendarAtendimento = (e) => {
         e.preventDefault();
@@ -85,7 +84,7 @@ function FormAgenda() {
     };
 
     return (
-        <div className={styles.body}> {/* Use a classe do CSS Module */}
+        <div className={styles.body}>
             <div className="container d-flex justify-content-center align-items-center min-vh-100">
                 <div className={`card p-4 ${styles.card}`} style={{ width: '100%', maxWidth: '400px' }}>
                     <h1 className="text-center mb-4">Agende seu Atendimento</h1>
@@ -108,7 +107,6 @@ function FormAgenda() {
                                 <option value="cabelo">Cabelo</option>
                                 <option value="unha">Unha</option>
                                 <option value="maquiagem">Maquiagem</option>
-                                {/* Adicione mais opções conforme necessário */}
                             </select>
                         </div>
 
@@ -134,6 +132,7 @@ function FormAgenda() {
                                 readOnly
                             />
                         </div>
+                        
                         <div className="mb-3">
                             <label className="form-label" htmlFor="observacao">Observação:</label>
                             <textarea
@@ -150,15 +149,13 @@ function FormAgenda() {
                                 className="form-control"
                                 id="fkIdFuncionario"
                                 value={fkIdFuncionario}
-                                onChange={(e) => setFkIdFuncionario(e.target.value)}
+                                onChange={handleFuncionarioChange}
                                 required
                             >
                                 <option value="">Selecione um funcionário</option>
-                                {funcionarios.map((funcionario) => (
-                                    <option key={funcionario.ID_FUNCIONARIO} value={funcionario.ID_FUNCIONARIO}>
-                                        {funcionario.NOME_FUNCIONARIO}
-                                    </option>
-                                ))}
+                                <option value="Braian">Braian</option>
+                                <option value="Lukas">Lukas</option>
+                                <option value="Ana">Ana</option>
                             </select>
                         </div>
 
@@ -170,7 +167,6 @@ function FormAgenda() {
             </div>
 
             <div className={styles.calendario}>
-                {/* Renderize o calendário aqui */}
                 {Array.from({ length: 30 }, (_, i) => {
                     const dia = `2024-09-${i + 1}`;
                     return (
