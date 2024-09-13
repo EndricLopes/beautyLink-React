@@ -151,7 +151,10 @@ function FormAgenda() {
                                 className="form-control"
                                 id="fkIdFuncionario"
                                 value={fkIdFuncionario}
-                                onChange={handleFuncionarioChange}
+                                onChange={(e) => {
+                                    handleFuncionarioChange(e); // Atualiza o nome na label
+                                    setFkIdFuncionario(e.target.value); // Atualiza o valor do funcionário
+                                }}
                                 required
                             >
                                 <option value="">Selecione um funcionário</option>
@@ -160,7 +163,6 @@ function FormAgenda() {
                                 <option value="Ana">Ana</option>
                             </select>
                         </div>
-
                         <div className="container__ponto__button">
                             <button type="submit" className="btn btn-primary w-100">Confirmar Agendamento</button>
                         </div>
