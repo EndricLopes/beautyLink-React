@@ -34,8 +34,7 @@ function FormAgenda() {
     const [dataMarcacao] = useState(new Date().toISOString().split('T')[0]); // Data atual
     const [statusAgendamento] = useState('CADASTRADO'); // Status fixo
     const [observacao, setObservacao] = useState('');
-    const [fkIdFuncionario, setFkIdFuncionario] = useState('');
-    const [labelFuncionario, setLabelFuncionario] = useState('Selecione um funcionário'); // Texto da label
+    const [fkIdFuncionario, setFkIdFuncionario] = useState(''); // ID do funcionário selecionado
     const [fkIdUsuarioCliente] = useState(user ? user.id : ''); // ID do usuário logado
     const navigate = useNavigate();
 
@@ -50,13 +49,23 @@ function FormAgenda() {
 
     const handleFuncionarioChange = (e) => {
         const selectedFuncionario = e.target.value;
+        let funcionarioId;
 
-        // Definindo o ID correto de acordo com o funcionário selecionado
-        const funcionarioId = selectedFuncionario === 'Braian' ? 1 :
-                              selectedFuncionario === 'Lukas' ? 2 : 3;
+        switch (selectedFuncionario) {
+            case 'Braian':
+                funcionarioId = 1;
+                break;
+            case 'Lukas':
+                funcionarioId = 2;
+                break;
+            case 'Ana':
+                funcionarioId = 3;
+                break;
+            default:
+                funcionarioId = '';
+        }
 
-        setFkIdFuncionario(funcionarioId); // Atualiza o ID do funcionário
-        setLabelFuncionario(selectedFuncionario); // Atualiza a label com o nome selecionado
+        setFkIdFuncionario(funcionarioId);
     };
 
     const AgendarAtendimento = (e) => {
@@ -68,7 +77,7 @@ function FormAgenda() {
             data_marcacao: dataMarcacao,
             status_agendamento: statusAgendamento,
             observacao: observacao,
-            fk_id_funcionario: fkIdFuncionario, // Enviando o ID correto
+            fk_id_funcionario: fkIdFuncionario,
             fk_id_usuario_cliente: fkIdUsuarioCliente
         }, {
             withCredentials: true
@@ -151,12 +160,12 @@ function FormAgenda() {
                         </div>
 
                         <div className="mb-3">
-                            <label className="form-label" htmlFor="fkIdFuncionario">{labelFuncionario}:</label>
+                            <label className="form-label" htmlFor="fkIdFuncionario">Funcionário:</label>
                             <select
                                 className="form-control"
                                 id="fkIdFuncionario"
                                 value={fkIdFuncionario}
-                                onChange={handleFuncionarioChange} // Chama apenas o handleFuncionarioChange
+                                onChange={handleFuncionarioChange}
                                 required
                             >
                                 <option value="">Selecione um funcionário</option>
