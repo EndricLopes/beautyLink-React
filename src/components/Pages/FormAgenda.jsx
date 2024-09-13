@@ -92,7 +92,6 @@ function FormAgenda() {
     };
 
     const isDiaOcupado = (data) => {
-        console.log('Verificando se o dia está ocupado:', data);
         return atendimentos.some(atendimento => atendimento.DATA_ATENDIMENTO === data);
     };
 
