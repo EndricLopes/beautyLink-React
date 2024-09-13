@@ -40,7 +40,7 @@ function FormAgenda() {
 
     useEffect(() => {
         // Buscar os atendimentos
-        axios.get('https://beauty-link-python.vercel.app/Atendimentos', {
+        axios.get('https://beauty-link-python.vercel.app/Atendimento', {
             params: { tipo_servico: tipoServico }
         })
         .then(response => setAtendimentos(response.data))
