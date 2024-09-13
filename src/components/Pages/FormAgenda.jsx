@@ -63,7 +63,7 @@ function FormAgenda() {
         console.log("ID do Funcionário:", fkIdFuncionario);
         console.log("ID do Usuário Cliente:", fkIdUsuarioCliente);
 
-        axios.post('https://beauty-link-python.vercel.app/CadastroAtendimento', {
+        axios.post('https://beauty-link-python.vercel.app/Atendimentos', {
             tipo_servico: tipoServico,
             data_atendimento: dataAtendimento,
             data_marcacao: dataMarcacao,
