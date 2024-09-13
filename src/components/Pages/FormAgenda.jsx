@@ -71,9 +71,7 @@ function FormAgenda() {
             observacao: observacao,
             fk_id_funcionario: fkIdFuncionario,
             fk_id_usuario_cliente: fkIdUsuarioCliente
-        }, {
-            withCredentials: true
-        })
+        },)
         .then((response) => {
             console.log(response.data.message);
             if (response.data.message === 'Atendimento cadastrado com sucesso') {
