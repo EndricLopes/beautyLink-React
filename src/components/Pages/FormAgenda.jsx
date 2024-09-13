@@ -35,6 +35,7 @@ function FormAgenda() {
     const [statusAgendamento] = useState('CADASTRADO'); // Status fixo
     const [observacao, setObservacao] = useState('');
     const [fkIdFuncionario, setFkIdFuncionario] = useState('');
+    const [labelFuncionario, setLabelFuncionario] = useState('Selecione um funcionário'); // Texto da label
     const [fkIdUsuarioCliente] = useState(user ? user.id : ''); // ID do usuário logado
     const navigate = useNavigate();
 
@@ -50,6 +51,7 @@ function FormAgenda() {
     const handleFuncionarioChange = (e) => {
         const selectedFuncionario = e.target.value;
         setFkIdFuncionario(selectedFuncionario === 'Braian' ? 5 : selectedFuncionario);
+        setLabelFuncionario(selectedFuncionario); // Atualiza a label com o nome selecionado
     };
 
     const AgendarAtendimento = (e) => {
@@ -144,7 +146,7 @@ function FormAgenda() {
                         </div>
 
                         <div className="mb-3">
-                            <label className="form-label" htmlFor="fkIdFuncionario">Funcionário:</label>
+                            <label className="form-label" htmlFor="fkIdFuncionario">{labelFuncionario}:</label>
                             <select
                                 className="form-control"
                                 id="fkIdFuncionario"
