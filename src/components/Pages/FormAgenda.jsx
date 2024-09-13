@@ -48,24 +48,7 @@ function FormAgenda() {
     }, [tipoServico]);
 
     const handleFuncionarioChange = (e) => {
-        const selectedFuncionario = e.target.value;
-        let funcionarioId;
-
-        switch (selectedFuncionario) {
-            case 'Braian':
-                funcionarioId = 1;
-                break;
-            case 'Lukas':
-                funcionarioId = 2;
-                break;
-            case 'Ana':
-                funcionarioId = 3;
-                break;
-            default:
-                funcionarioId = '';
-        }
-
-        setFkIdFuncionario(funcionarioId);
+        setFkIdFuncionario(e.target.value);
     };
 
     const AgendarAtendimento = (e) => {
@@ -169,9 +152,9 @@ function FormAgenda() {
                                 required
                             >
                                 <option value="">Selecione um funcionário</option>
-                                <option value="Braian">Braian</option>
-                                <option value="Lukas">Lukas</option>
-                                <option value="Ana">Ana</option>
+                                <option value="1">Braian</option>
+                                <option value="2">Lukas</option>
+                                <option value="3">Ana</option>
                             </select>
                         </div>
                         <div className="container__ponto__button">
