@@ -3,7 +3,7 @@ import { createContext, useState } from 'react';
 
 export const UserContext = createContext();
 
-export function UserProvider({ children }) {
+export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     return (
@@ -11,8 +11,11 @@ export function UserProvider({ children }) {
             {children}
         </UserContext.Provider>
     );
-}
+};
 
 UserProvider.propTypes = {
     children: PropTypes.node.isRequired
 };
+
+
+

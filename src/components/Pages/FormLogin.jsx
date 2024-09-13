@@ -11,7 +11,7 @@ function FormLogin() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const savedUser = localStorage.getItem('user');
+        const savedUser = JSON.parse(localStorage.getItem('user'));
         if (savedUser) {
             setUser(savedUser);
         }
@@ -31,9 +31,13 @@ function FormLogin() {
         })
         .then((response) => {
             console.log(response.data.message);
-            setUser(usuario);
-            console.log('Usuário definido:', usuario);
-            localStorage.setItem('user', usuario);
+            const userData = {
+                nome: usuario,
+                id: response.data.id_usuario // Recebe o ID do usuário
+            };
+            setUser(userData);
+            console.log('Usuário definido:', userData);
+            localStorage.setItem('user', JSON.stringify(userData)); // Armazena o usuário e o ID no localStorage
             navigate("/Ponto");
         })
         .catch((error) => {
