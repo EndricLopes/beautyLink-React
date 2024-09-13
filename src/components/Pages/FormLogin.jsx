@@ -41,7 +41,14 @@ function FormLogin() {
         })
         .then((response) => {
             console.log('Resposta da API:', response.data);
+
+            // Verifique a estrutura completa do objeto de resposta
+            console.log('Estrutura da resposta:', response);
+
             if (response.data.message === 'Login bem-sucedido') {
+                // Verifique se id_usuario está presente
+                console.log('ID do usuário retornado:', response.data.id_usuario);
+                
                 const userData = {
                     nome: usuario,
                     id: response.data.id_usuario
