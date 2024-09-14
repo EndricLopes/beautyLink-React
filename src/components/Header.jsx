@@ -18,11 +18,16 @@ const Header = () => {
     navigate('/Produto');
   };
 
+  
+  const linkHome = () => {
+    navigate('/');
+  };
+
   return (
     <div>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand href="#home">Beauty Link</Navbar.Brand>
+          <Navbar.Brand href="#home" onClick={linkHome}>Beauty Link</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mx-auto">

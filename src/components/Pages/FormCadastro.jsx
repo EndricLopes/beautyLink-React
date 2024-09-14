@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from '../../styles/Cadastro.module.css'; // Atualize para importar o CSS Module
+import Header from '../Header';
 
 function Cadastro() {
   const [novoUsuario, setNovoUsuario] = useState({ nome: '', usuario: '', email: '', senha: '' });
@@ -28,6 +29,8 @@ function Cadastro() {
   };
 
   return (
+    <div>
+      <Header/>
     <div className={styles.body}> {/* Utilize a classe de estilo CSS Module */}
       <div className="container d-flex justify-content-center align-items-center min-vh-100">
         <div className={`card p-4 ${styles.card}`} style={{ width: '100%', maxWidth: '400px' }}>
@@ -108,6 +111,7 @@ function Cadastro() {
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 }
