@@ -16,7 +16,7 @@ const HomePage = () => {
             </ol>
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <img src="https://i.pinimg.com/564x/f4/74/67/f4746781f4ea24ca650548298ed5244e.jpg" className="d-block w-100" alt="Slide 1" />
+                <img src="https://via.placeholder.com/800x400" className="d-block w-100" alt="Slide 1" />
                 <div className="carousel-caption d-none d-md-block">
                   <h5>Primeira Imagem</h5>
                   <p>Descrição da primeira imagem.</p>
