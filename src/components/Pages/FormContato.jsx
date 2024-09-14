@@ -1,7 +1,7 @@
-import React from 'react';
-import "../../styles/contato.css";
 
-const Contact = () => {
+import "../../styles/Contato.css";
+
+const FormContato = () => {
     return (
         <div className="contact-container">
             <div className="side-bar">
