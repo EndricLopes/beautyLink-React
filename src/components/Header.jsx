@@ -13,6 +13,10 @@ const Header = () => {
   const linkLogin = () => {
     navigate('/Login');
   };
+  
+  const linkProduto = () => {
+    navigate('/Produto');
+  };
 
   return (
     <div>
@@ -27,7 +31,7 @@ const Header = () => {
               <Nav.Link href="#contact">Agendamento</Nav.Link>
               <Nav.Link href="#contact">Contatos</Nav.Link>
               <Nav.Link href="#link">Equipes</Nav.Link>
-              <Nav.Link href="#link">Estoque</Nav.Link>
+              <Nav.Link href="#link" onClick={linkProduto}>Estoque</Nav.Link>
 
               <NavDropdown title="Conecte-se" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1" onClick={linkLogin}>Login</NavDropdown.Item>

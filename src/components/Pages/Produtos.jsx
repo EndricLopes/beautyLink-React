@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 // Produtos.jsx
 import React from 'react';
-import './Produtos.css';
+import '../../styles/Produtos.css';
 
 const Produtos = () => {
   // Simulação de dados de produtos

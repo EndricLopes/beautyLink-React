@@ -10,6 +10,7 @@ import './index.css'
 import PageError from './components/Pages/PageError';
 import EspelhoPonto from './components/Pages/EspelhoPonto';
 import HomePage from './components/Pages/HomePage';
+import Produtos from './components/Pages/Produtos';
 
 const Rotas=createBrowserRouter([
     { path: "/", 
@@ -31,6 +32,10 @@ const Rotas=createBrowserRouter([
         {
         path:"/Espelho", 
         element:<EspelhoPonto/>
+        },
+        {
+        path:"/Produto", 
+        element:<Produtos/>
         },
         {
         path:"/", 
