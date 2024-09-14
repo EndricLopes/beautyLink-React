@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 // Produtos.jsx
 import React from 'react';
-import '../../styles/Header.css';
 import '../../styles/Produtos.css';
 
 const Produtos = () => {
