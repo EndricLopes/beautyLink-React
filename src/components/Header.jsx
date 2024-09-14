@@ -23,6 +23,11 @@ const Header = () => {
     navigate('/');
   };
 
+  
+  const linkAgendamento = () => {
+    navigate('/Agendamentos');
+  };
+
   return (
     <div>
       <Navbar expand="lg" className="bg-body-tertiary">
@@ -33,7 +38,7 @@ const Header = () => {
             <Nav className="mx-auto">
               <Nav.Link href="#home">Home</Nav.Link>
               <Nav.Link href="#about">Sobre</Nav.Link>
-              <Nav.Link href="#contact">Agendamento</Nav.Link>
+              <Nav.Link href="#contact" onClick={linkAgendamento}>Agendamento</Nav.Link>
               <Nav.Link href="#contact">Contatos</Nav.Link>
               <Nav.Link href="#link">Equipes</Nav.Link>
               <Nav.Link href="#link" onClick={linkProduto}>Estoque</Nav.Link>

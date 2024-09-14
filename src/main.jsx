@@ -11,6 +11,7 @@ import PageError from './components/Pages/PageError';
 import EspelhoPonto from './components/Pages/EspelhoPonto';
 import HomePage from './components/Pages/HomePage';
 import Produtos from './components/Pages/Produtos';
+import Agendamentos from './components/Pages/FormAgendamentos';
 
 const Rotas=createBrowserRouter([
     { path: "/", 
@@ -36,6 +37,10 @@ const Rotas=createBrowserRouter([
         {
         path:"/Produto", 
         element:<Produtos/>
+        },
+        {
+        path:"/Agendamentos", 
+        element:<Agendamentos/>
         },
         {
         path:"/", 
