@@ -1,5 +1,4 @@
-import React from 'react';
-import "../../styles/Contato.css";
+import "../../styles/Contato.module.css";
 
 const FormContato = () => {
     return (
