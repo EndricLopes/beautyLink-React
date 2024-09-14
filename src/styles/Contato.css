@@ -1,0 +1,125 @@
+/* src/styles/contato.css */
+
+body {
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.contact-container {
+    background-color: #1b2a49;
+    border-radius: 20px;
+    padding: 10px;
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.side-bar {
+    width: 150px;
+    background-color: #0d1b36;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px 0 0 15px;
+    padding: 10px;
+}
+
+.side-bar a {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.side-bar .brand {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+.side-bar .social-icons img {
+    width: 24px; /* Tamanho pequeno das imagens */
+    height: auto;
+    margin: 5px 0;
+}
+
+.image-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right: 10px;
+    margin-left: 20px; /* Adiciona espaço à esquerda das imagens */
+}
+
+.image-bar img {
+    width: 110px;
+    height: 550px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 15px;
+}
+
+.contact-form {
+    padding: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Centralizar o conteúdo */
+}
+
+.contact-form h3 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.contact-info {
+    text-align: center; /* Centralizar as informações */
+    margin-bottom: 20px;
+}
+
+.contact-info p {
+    margin: 5px 0;
+}
+
+.form-control {
+    background-color: #6a11cb;
+    border: 0px solid #fff;
+    border-radius: 0px;
+    color: #fff;
+    width: 80%; /* Definir a largura dos campos do formulário */
+    margin-bottom: 15px;
+}
+
+.form-control:focus {
+    background-color: transparent;
+    color: #fff;
+    box-shadow: none;
+    border-color: #6a11cb;
+}
+
+.btn-custom {
+    background-color:#808080;
+    border-radius: 30px;
+    padding: 10px 20px;
+    border: none;
+    width: 50%; /* Definir a largura do botão */
+}
+
+.btn-custom:hover {
+    background-color: #2575fc;
+}
