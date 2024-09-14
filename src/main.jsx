@@ -12,6 +12,8 @@ import EspelhoPonto from './components/Pages/EspelhoPonto';
 import HomePage from './components/Pages/HomePage';
 import Produtos from './components/Pages/Produtos';
 import Agendamentos from './components/Pages/FormAgendamentos';
+import FormContato from './components/Pages/FormContato';
+
 
 const Rotas=createBrowserRouter([
     { path: "/", 
@@ -41,6 +43,10 @@ const Rotas=createBrowserRouter([
         {
         path:"/Agendamentos", 
         element:<Agendamentos/>
+        },
+        {
+        path:"/Contato", 
+        element:<FormContato/>
         },
         {
         path:"/", 
