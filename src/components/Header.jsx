@@ -27,6 +27,8 @@ const Header = () => {
               <Nav.Link href="#contact">Agendamento</Nav.Link>
               <Nav.Link href="#contact">Contatos</Nav.Link>
               <Nav.Link href="#link">Equipes</Nav.Link>
+              <Nav.Link href="#link">Estoque</Nav.Link>
+
               <NavDropdown title="Conecte-se" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1" onClick={linkLogin}>Login</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">Cadastro</NavDropdown.Item>
