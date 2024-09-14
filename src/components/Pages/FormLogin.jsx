@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from '../../styles/Login.module.css';
 import { UserContext } from './UserContext';
+import Header from '../Header';
 
 function FormLogin() {
     const { setUser } = useContext(UserContext);
@@ -72,6 +73,8 @@ function FormLogin() {
     }
 
     return (
+        <div>
+            <Header/>
         <div className={styles.body}>
             <div className="container d-flex justify-content-center align-items-center min-vh-100">
                 <div className="card p-4" style={{ width: '100%', maxWidth: '400px' }}>
@@ -113,6 +116,7 @@ function FormLogin() {
                     </form>
                 </div>
             </div>
+        </div>
         </div>
     );
 }

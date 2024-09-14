@@ -31,6 +31,6 @@
 
 /* Mantém a cor preta ao passar o mouse */
 .dropdown-menu .dropdown-item:hover {
-  background-color: rgba(0, 0, 0, 0.1); /* Adiciona um leve efeito ao passar o mouse */
+  background-color: rgba(0, 212, 255, 1); /* Adiciona um leve efeito ao passar o mouse */
   color: black !important; /* Garante que a cor preta permaneça no hover */
 }
