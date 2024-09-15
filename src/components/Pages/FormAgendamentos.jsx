@@ -40,7 +40,9 @@ function Agendamentos() {
         <div
           key={i}
           className={`p-2 border ${temAtendimento ? 'bg-sucess text-white' : 'bg-light'}`}
-          style={{ width: '50px', height: '50px', display: 'inline-block', margin: '5px' }}
+          style={{ width: '50px', height: '50px', display: 'inline-block', margin: '5px', backgroundColor: temAtendimento,'#28a745':'#f8f9fa', 
+            color: temAtendimento, 'white' : 'black' 
+          }}
         >
           {i + 1}
         </div>
