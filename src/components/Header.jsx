@@ -41,7 +41,7 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mx-auto">
               <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#about" onClick={linkSobre}>Sobre</Nav.Link>
+              <Nav.Link href="#about">Sobre</Nav.Link>
               <Nav.Link href="#contact" onClick={linkAgendamento}>Agendamento</Nav.Link>
               <Nav.Link href="#contact" onClick={linkContato}>Contatos</Nav.Link>
               <Nav.Link href="#link">Equipes</Nav.Link>
