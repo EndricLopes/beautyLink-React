@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { UserContext } from './UserContext';
 import axios from 'axios';
@@ -29,7 +29,6 @@ ConfirmAcao.propTypes = {
 function FormAgenda() {
     const { user } = useContext(UserContext);
     const [mostrarModal, setMostrarModal] = useState(false);
-    const [atendimentos, setAtendimentos] = useState([]);
     const [tipoServico, setTipoServico] = useState('');
     const [dataAtendimento, setDataAtendimento] = useState('');
     const [dataMarcacao] = useState(new Date().toISOString().split('T')[0]); // Data atual
@@ -38,20 +37,6 @@ function FormAgenda() {
     const [fkIdFuncionario, setFkIdFuncionario] = useState(''); // ID do funcionário selecionado
     const [fkIdUsuarioCliente] = useState(user ? user.id : ''); // ID do usuário logado
     const navigate = useNavigate();
-
-    useEffect(() => {
-        console.log('Fetching atendimentos with tipo_servico:', fkIdUsuarioCliente);
-        axios.get('https://beauty-link-python.vercel.app/Atendimento', {
-            params: { tipo_servico: fkIdUsuarioCliente }
-        })
-        .then(response => {
-            console.log('Atendimentos fetched:', response.data);
-            setAtendimentos(response.data);
-        })
-        .catch(error => {
-            console.error('Erro ao buscar atendimentos:', error.response ? error.response.data : error.message);
-        });
-    }, [fkIdUsuarioCliente]);
 
     const handleFuncionarioChange = (e) => {
         console.log('Funcionario selecionado:', e.target.value);
@@ -90,10 +75,6 @@ function FormAgenda() {
             console.error('Erro ao cadastrar atendimento:', error.response ? error.response.data : error.message);
             window.alert('Erro ao cadastrar atendimento. Por favor, tente novamente.');
         }
-    };
-
-    const isDiaOcupado = (data) => {
-        return atendimentos.some(atendimento => atendimento.DATA_ATENDIMENTO === data);
     };
 
     return (
@@ -178,20 +159,6 @@ function FormAgenda() {
                         </div>
                     </form>
                 </div>
-            </div>
-
-            <div className={styles.calendario}>
-                {Array.from({ length: 30 }, (_, i) => {
-                    const dia = `2024-09-${(i + 1).toString().padStart(2, '0')}`;
-                    return (
-                        <div
-                            key={i}
-                            className={isDiaOcupado(dia) ? styles.diaOcupado : styles.diaNormal}
-                        >
-                            {i + 1}
-                        </div>
-                    );
-                })}
             </div>
 
             {mostrarModal && (
