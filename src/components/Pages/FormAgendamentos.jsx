@@ -39,7 +39,7 @@ function Agendamentos() {
       return (
         <div
           key={i}
-          className={`p-2 border ${temAtendimento ? 'DiaOcupado' : 'dia Normal'}`}
+          className={`p-2 border ${temAtendimento ? 'bg-primary text-white' : 'bg-light'}`}
           style={{ width: '50px', height: '50px', display: 'inline-block', margin: '5px'
           }}
         >
