@@ -14,11 +14,14 @@ function Agendamentos() {
 
   useEffect(() => {
     if (user) {
+      console.log('Usuário logado:', user.id); // Verificar o ID do usuário logado
+
       axios
         .get('https://beauty-link-python.vercel.app/Atendimento', {
           params: { usuario: user.id },
         })
         .then((response) => {
+          console.log('Dados recebidos da API:', response.data); // Verificar o que está chegando da API
           setAtendimentos(response.data);
         })
         .catch((error) => {
@@ -71,29 +74,29 @@ function Agendamentos() {
 
   return (
     <div>
-        <Header />
-        <div className={`${styles.body} min-vh-100 d-flex justify-content-center align-items-center`}>
-          <div className="card p-4" style={{ width: '100%', maxWidth: '600px' }}>
-            <div className="container mt-4">
-              <h2>Seus Agendamentos</h2>
-              <p className="text-white">{mensagemAtendimentos}</p>
-              <div className="d-flex justify-content-between align-items-center my-3">
-                <button className="btn btn-primary" onClick={irParaMesAnterior}>Anterior</button>
-                <span>{`${mes}/${ano}`}</span>
-                <button className="btn btn-primary" onClick={irParaMesProximo}>Próximo</button>
-              </div>
-              <div className="d-flex flex-wrap justify-content-center">
-                {gerarDiasDoMes()}
-              </div>
-              <button
-                className="btn btn-success mt-4"
-                onClick={() => navigate('/Ponto')}
-              >
-                Ir para Agendamento
-              </button>
+      <Header />
+      <div className={`${styles.body} min-vh-100 d-flex justify-content-center align-items-center`}>
+        <div className="card p-4" style={{ width: '100%', maxWidth: '600px' }}>
+          <div className="container mt-4">
+            <h2>Seus Agendamentos</h2>
+            <p className="text-white">{mensagemAtendimentos}</p>
+            <div className="d-flex justify-content-between align-items-center my-3">
+              <button className="btn btn-primary" onClick={irParaMesAnterior}>Anterior</button>
+              <span>{`${mes}/${ano}`}</span>
+              <button className="btn btn-primary" onClick={irParaMesProximo}>Próximo</button>
             </div>
+            <div className="d-flex flex-wrap justify-content-center">
+              {gerarDiasDoMes()}
+            </div>
+            <button
+              className="btn btn-success mt-4"
+              onClick={() => navigate('/Ponto')}
+            >
+              Ir para Agendamento
+            </button>
           </div>
         </div>
+      </div>
     </div>
   );
 }
