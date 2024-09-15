@@ -16,10 +16,10 @@ const HomePage = () => {
             </ol>
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <img src="https://via.placeholder.com/800x400" className="d-block w-100" alt="Slide 1" />
+                <img src="https://i.pinimg.com/564x/ee/ba/3b/eeba3ba23f80ccc17925c5d537125edb.jpg" className="d-block w-100" alt="Slide 1" />
                 <div className="carousel-caption d-none d-md-block">
                   <h5>Primeira Imagem</h5>
-                  <p>Descrição da primeira imagem.</p>
+                  <p>Entenda a importância de cortar o cabelo com frequência </p>
                 </div>
               </div>
               <div className="carousel-item">
