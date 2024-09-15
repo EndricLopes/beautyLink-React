@@ -10,7 +10,7 @@ const Sobre = () => {
         <div className="row no-gutters">
           <div className="col-md-4 d-none d-md-block sobre-image">
             <img
-              src="https://i.pinimg.com/564x/81/0d/66/810d66dc2dcd2272a7f1ef5352a5ec55.jpg" // substitua pela imagem real
+              src="https://i.pinimg.com/564x/81/0d/66/810d66dc2dcd2272a7f1ef5352a5ec55.jpg"
               alt="Sobre"
               className="img-fluid"
             />
