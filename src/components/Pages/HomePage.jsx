@@ -23,7 +23,7 @@ const HomePage = () => {
                 </div>
               </div>
               <div className="carousel-item">
-                <img src="https://i.pinimg.com/564x/0a/1c/45/0a1c45c02a8e24f263fab9bbbb969373.jpg" className="d-block w-100" alt="Slide 2" />
+                <img src="https://via.placeholder.com/800x400" className="d-block w-100" alt="Slide 2" />
                 <div className="carousel-caption d-none d-md-block">
                   <h5>Segunda Imagem</h5>
                   <p>Descrição da segunda imagem.</p>
