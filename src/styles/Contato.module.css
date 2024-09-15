@@ -1,0 +1,114 @@
+/* src/components/Contato.module.css */
+
+.contactContainer {
+    background-color: #1b2a49;
+    border-radius: 20px;
+    padding: 10px;
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.sideBar {
+    width: 150px;
+    background-color: #0d1b36;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px 0 0 15px;
+    padding: 10px;
+}
+
+.sideBar a {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.sideBar .brand {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+.sideBar .socialIcons img {
+    width: 24px;
+    height: auto;
+    margin: 10px 0;
+}
+
+.imageBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right: 10px;
+    margin-left: 20px;
+}
+
+.imageBar img {
+    width: 110px;
+    height: 550px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 15px;
+}
+
+.contactForm {
+    padding: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contactForm h3 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.contactInfo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contactInfo p {
+    margin: 5px 0;
+}
+
+.formControl {
+    background-color: #6a11cb;
+    border: 0px solid #fff;
+    border-radius: 0px;
+    color: #fff;
+    width: 80%;
+    margin-bottom: 15px;
+}
+
+.formControl:focus {
+    background-color: transparent;
+    color: #fff;
+    box-shadow: none;
+    border-color: #6a11cb;
+}
+
+.btnCustom {
+    background-color: #808080;
+    border-radius: 30px;
+    padding: 10px 20px;
+    border: none;
+    width: 50%;
+}
+
+.btnCustom:hover {
+    background-color: #2575fc;
+}
