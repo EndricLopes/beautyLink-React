@@ -79,7 +79,7 @@
 }
 
 .diaOcupado {
-    background-color: red;
+    background-color: rgb(0, 230, 69);
     color: white;
     border: 1px solid #ccc;
     padding: 10px;
