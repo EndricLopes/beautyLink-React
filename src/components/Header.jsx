@@ -41,12 +41,11 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mx-auto">
               <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#about">Sobre</Nav.Link>
+              <Nav.Link href="#about" onClick={linkContato}>Sobre</Nav.Link>
               <Nav.Link href="#contact" onClick={linkAgendamento}>Agendamento</Nav.Link>
               <Nav.Link href="#contact" onClick={linkContato}>Contatos</Nav.Link>
               <Nav.Link href="#link">Equipes</Nav.Link>
               <Nav.Link href="#link" onClick={linkProduto}>Estoque</Nav.Link>
-              <Nav.Link href="#link" onClick={linkProduto}>Sobre</Nav.Link>
 
 
               <NavDropdown title="Conecte-se" id="basic-nav-dropdown">
