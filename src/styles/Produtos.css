@@ -1,0 +1,80 @@
+/* src/styles/Produtos.css */
+.produtos-container {
+    padding-top: 50px;
+  }
+  
+  /* Ajuste no tamanho dos cards */
+  .produtos-card {
+    width: 100%; /* Define a largura total em dispositivos pequenos */
+    height: auto; /* Deixa a altura automática para garantir que se ajuste ao conteúdo */
+    max-width: 250px; /* Largura máxima para telas maiores */
+    margin: 0 auto; /* Centraliza os cards horizontalmente */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .produtos-card img {
+    height: 150px; /* Tamanho da imagem ajustado */
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  .produtos-card .card-body {
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .produtos-card .card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+  
+  .produtos-card .card-text {
+    font-size: 0.9rem;
+  }
+  
+  .produtos-card .btn {
+    margin-top: 10px;
+    width: 100%;
+    background-color: #5a67d8; /* Cor ajustada do botão */
+    border: none;
+    border-radius: 5px;
+    padding: 8px 0;
+  }
+  
+  .produtos-card .btn:hover {
+    background-color: #434190; /* Cor de hover ajustada */
+  }
+  
+  /* Responsividade */
+  @media (max-width: 576px) {
+    .produtos-card {
+      max-width: 200px; /* Reduz a largura máxima para dispositivos menores */
+    }
+  
+    .produtos-card img {
+      height: 120px; /* Reduz o tamanho da imagem para dispositivos menores */
+    }
+  
+    .produtos-card .card-title {
+      font-size: 1rem;
+    }
+  
+    .produtos-card .card-text {
+      font-size: 0.85rem;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .produtos-card {
+      max-width: 220px; /* Ligeiramente maior em tablets */
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .produtos-card {
+      max-width: 250px; /* Mantém o tamanho original em telas maiores */
+    }
+  }
+  

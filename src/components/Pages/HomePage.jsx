@@ -1,6 +1,7 @@
 import Header from '../Header';
 import '../../styles/Header.css'; // Importa o CSS do cabeçalho
 import '../../styles/Home.css'; // Importa o CSS específico da HomePage
+import mulher1 from '../Imagens/mulher1.jpg';
 
 const HomePage = () => {
   return (
@@ -16,35 +17,35 @@ const HomePage = () => {
             </ol>
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <img src="https://i.pinimg.com/564x/ee/ba/3b/eeba3ba23f80ccc17925c5d537125edb.jpg" className="d-block w-100" alt="Slide 1" />
+                <img src={mulher1} className="d-block w-100" alt="Cabelo e Estilo" />
                 <div className="carousel-caption d-none d-md-block">
-                  <h5>Primeira Imagem</h5>
-                  <p>Entenda a importância de cortar o cabelo com frequência </p>
+                  <h5>Transforme seu Estilo</h5>
+                  <p>Cuidados profissionais com o cabelo para um visual impecável.</p>
                 </div>
               </div>
               <div className="carousel-item">
-                <img src="https://via.placeholder.com/800x400" className="d-block w-100" alt="Slide 2" />
+                <img src="https://i.pinimg.com/564x/b3/f1/76/b3f176bf83c1a8d307607b8d6a3c0f3e.jpg" className="d-block w-100" alt="Unhas e Beleza" />
                 <div className="carousel-caption d-none d-md-block">
-                  <h5>Segunda Imagem</h5>
-                  <p>Descrição da segunda imagem.</p>
+                  <h5>Unhas Perfeitas</h5>
+                  <p>Deixe suas unhas impecáveis com nossos serviços de manicure e pedicure.</p>
                 </div>
               </div>
               <div className="carousel-item">
-                <img src="https://via.placeholder.com/800x400" className="d-block w-100" alt="Slide 3" />
+                <img src="https://i.pinimg.com/564x/ed/19/4b/ed194b405d160e889b63f1ff3eec6f0d.jpg" className="d-block w-100" alt="Maquiagem Profissional" />
                 <div className="carousel-caption d-none d-md-block">
-                  <h5>Terceira Imagem</h5>
-                  <p>Descrição da terceira imagem.</p>
+                  <h5>Maquiagem Perfeita</h5>
+                  <p>Realce sua beleza natural com nossas maquiagens personalizadas.</p>
                 </div>
               </div>
             </div>
-            <button className="carousel-control-prev" type="button" data-target="#carouselExampleCaptions" data-slide="prev">
+            <a className="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
               <span className="carousel-control-prev-icon" aria-hidden="true"></span>
               <span className="sr-only">Anterior</span>
-            </button>
-            <button className="carousel-control-next" type="button" data-target="#carouselExampleCaptions" data-slide="next">
+            </a>
+            <a className="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
               <span className="carousel-control-next-icon" aria-hidden="true"></span>
               <span className="sr-only">Próximo</span>
-            </button>
+            </a>
           </div>
         </div>
       </main>
@@ -53,4 +54,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-

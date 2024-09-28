@@ -32,12 +32,10 @@
 }
 
 .diaOcupado {
-    background-color: green; /* Verde para dias com atendimento já marcado */
+    background-color: red;
     color: white;
     border: 1px solid #ccc;
-}
-
-.diaSelecionado {
-    background-color: blue; /* Azul para o dia selecionado */
-    color: white;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
 }

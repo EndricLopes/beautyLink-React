@@ -3,26 +3,36 @@ import { UserContext } from './UserContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Header';
-import styles from '../../styles/Login.module.css';
+import styles from '../../styles/Agenda.module.css';
 
 function Agendamentos() {
   const { user } = useContext(UserContext);
   const [atendimentos, setAtendimentos] = useState([]);
   const [mes, setMes] = useState(new Date().getMonth() + 1); // Mês atual
   const [ano, setAno] = useState(new Date().getFullYear()); // Ano atual
+  const [dataSelecionada, setDataSelecionada] = useState(''); // Data selecionada no calendário
+  const [diaSelecionado, setDiaSelecionado] = useState(null); // Controle do dia selecionado no calendário
+  const [tipoServico, setTipoServico] = useState('');
+  const [observacao, setObservacao] = useState('');
+  const [fkIdFuncionario, setFkIdFuncionario] = useState('');
   const navigate = useNavigate();
+
+  // Redireciona para a página de login se o usuário não estiver logado
+  useEffect(() => {
+    if (!user) {
+      navigate('/Login');
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     const buscarAtendimentos = async () => {
       if (user) {
-        console.log('Usuário logado:', user.id); // Verificar o ID do usuário logado
-
         try {
           const response = await axios.get('https://beauty-link-python.vercel.app/Atendimento', {
-            params: { usuario: user.id } // Certifique-se de que o ID do usuário logado é passado corretamente
+            params: { usuario: user.id }
           });
 
-          console.log('Atendimentos recebidos:', response.data);
+          console.log('Atendimentos recebidos:', response.data); // Mostrando os atendimentos recebidos
           setAtendimentos(response.data);
         } catch (error) {
           console.error('Erro ao buscar atendimentos:', error.response ? error.response.data : error.message);
@@ -34,42 +44,44 @@ function Agendamentos() {
     buscarAtendimentos();
   }, [user]);
 
-  // Função para verificar se o dia tem atendimento
   const isDiaOcupado = (diaAtual) => {
-    return atendimentos.some((atendimento) => {
-      const dataAtendimento = new Date(atendimento.DATA_ATENDIMENTO); 
-      console.log('Comparando:', dataAtendimento, diaAtual); // Verificar as datas comparadas
+    const ocupado = atendimentos.some((atendimento) => {
+      const dataAtendimento = new Date(atendimento.DATA_ATENDIMENTO);
       return (
         dataAtendimento.getDate() === diaAtual.getDate() &&
-        dataAtendimento.getMonth() + 1 === mes &&
-        dataAtendimento.getFullYear() === ano
+        dataAtendimento.getMonth() === diaAtual.getMonth() &&
+        dataAtendimento.getFullYear() === diaAtual.getFullYear()
       );
     });
-  };
-  
 
-  // Gerar os dias do mês e destacar os dias com atendimento
+    if (ocupado) {
+      console.log(`Dia ${diaAtual.getDate()}/${diaAtual.getMonth() + 1}/${diaAtual.getFullYear()} está ocupado`);
+    }
+
+    return ocupado;
+  };
+
   const gerarDiasDoMes = () => {
-    const diasNoMes = new Date(ano, mes, 0).getDate(); // Obter número de dias no mês
+    const diasNoMes = new Date(ano, mes, 0).getDate();
     return Array.from({ length: diasNoMes }, (_, i) => {
-      const dia = new Date(ano, mes - 1, i + 1); // Criar uma data para cada dia do mês
-      const temAtendimento = isDiaOcupado(dia); // Verificar se o dia tem atendimento
+      const dia = new Date(ano, mes - 1, i + 1);
+      const temAtendimento = isDiaOcupado(dia);
+      const isSelected = diaSelecionado === i + 1; // Verifica se é o dia selecionado
+
       return (
         <div
           key={i}
-          className={`p-2 border ${temAtendimento ? 'bg-success text-white' : 'bg-light'}`} // Destacar o dia com atendimento em verde
-          style={{ width: '50px', height: '50px', display: 'inline-block', margin: '5px' }}
+          onClick={() => {
+            setDataSelecionada(dia.toISOString().split('T')[0]);
+            setDiaSelecionado(i + 1); // Atualiza o dia selecionado
+          }}
+          className={`${styles.diaNormal} ${temAtendimento ? styles.diaOcupado : ''} ${isSelected ? styles.diaSelecionado : ''}`} // Aplica o estilo para dia ocupado e selecionado
         >
           {i + 1}
         </div>
       );
     });
   };
-
-  const quantidadeAtendimentos = atendimentos.length;
-  const mensagemAtendimentos = quantidadeAtendimentos > 0
-    ? `Você tem ${quantidadeAtendimentos} agendamento(s) encontrado(s).`
-    : 'Nenhum agendamento encontrado.';
 
   const irParaMesAnterior = () => {
     if (mes === 1) {
@@ -89,28 +101,104 @@ function Agendamentos() {
     }
   };
 
+  const handleFuncionarioChange = (e) => {
+    setFkIdFuncionario(e.target.value);
+  };
+
+  const AgendarAtendimento = async (e) => {
+    e.preventDefault();
+    const dataMarcacao = new Date().toISOString().split('T')[0];
+    const statusAgendamento = 'CADASTRADO';
+    const fkIdUsuarioCliente = user ? user.id : '';
+
+    try {
+      const response = await axios.post('https://beauty-link-python.vercel.app/Ponto', {
+        tipo_servico: tipoServico,
+        data_atendimento: dataSelecionada,
+        data_marcacao: dataMarcacao,
+        status_agendamento: statusAgendamento,
+        observacao: observacao,
+        fk_id_funcionario: fkIdFuncionario,
+        fk_id_usuario_cliente: fkIdUsuarioCliente
+      });
+
+      if (response.data.message === 'Atendimento cadastrado com sucesso') {
+        window.alert('Atendimento cadastrado com sucesso!');
+        navigate('/');
+      }
+    } catch (error) {
+      window.alert('Erro ao cadastrar atendimento. Por favor, tente novamente.');
+    }
+  };
+
   return (
     <div>
       <Header />
-      <div className={`${styles.body} min-vh-100 d-flex justify-content-center align-items-center`}>
-        <div className="card p-4" style={{ width: '100%', maxWidth: '600px' }}>
-          <div className="container mt-4">
-            <h2>Seus Agendamentos</h2>
-            <p className="text-white">{mensagemAtendimentos}</p>
+      <div className={styles.body}>
+        <div className="container d-flex justify-content-center align-items-center min-vh-100">
+          <div className={`card p-4 ${styles.card}`} style={{ width: '100%', maxWidth: '600px', maxHeight: '80vh', overflowY: 'auto' }}>
+            <h2 className="text-center mb-4">Seus Agendamentos</h2>
+
+            <div className={styles.calendario}>
+              {gerarDiasDoMes()}
+            </div>
+
             <div className="d-flex justify-content-between align-items-center my-3">
               <button className="btn btn-primary" onClick={irParaMesAnterior}>Anterior</button>
               <span>{`${mes}/${ano}`}</span>
               <button className="btn btn-primary" onClick={irParaMesProximo}>Próximo</button>
             </div>
-            <div className="d-flex flex-wrap justify-content-center">
-              {gerarDiasDoMes()}
-            </div>
-            <button
-              className="btn btn-success mt-4"
-              onClick={() => navigate('/Ponto')}
-            >
-              Ir para Agendamento
-            </button>
+
+            {dataSelecionada && (
+              <div className="mt-4">
+                <h3>Agendar Atendimento para {dataSelecionada}</h3>
+                <form onSubmit={AgendarAtendimento}>
+                  <div className="mb-3">
+                    <label className="form-label" htmlFor="tipoServico">Tipo de Serviço:</label>
+                    <select
+                      className="form-control"
+                      id="tipoServico"
+                      value={tipoServico}
+                      onChange={(e) => setTipoServico(e.target.value)}
+                      required
+                    >
+                      <option value="">Selecione um serviço</option>
+                      <option value="cabelo">Cabelo</option>
+                      <option value="unha">Unha</option>
+                      <option value="maquiagem">Maquiagem</option>
+                    </select>
+                  </div>
+
+                  <div className="mb-3">
+                    <label className="form-label" htmlFor="observacao">Observação:</label>
+                    <textarea
+                      className="form-control"
+                      id="observacao"
+                      value={observacao}
+                      onChange={(e) => setObservacao(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="mb-3">
+                    <label className="form-label" htmlFor="fkIdFuncionario">Funcionário:</label>
+                    <select
+                      className="form-control"
+                      id="fkIdFuncionario"
+                      value={fkIdFuncionario}
+                      onChange={handleFuncionarioChange}
+                      required
+                    >
+                      <option value="">Selecione um funcionário</option>
+                      <option value="5">Braian</option>
+                      <option value="2">Lukas</option>
+                      <option value="3">Ana</option>
+                    </select>
+                  </div>
+
+                  <button type="submit" className="btn btn-primary w-100">Confirmar Agendamento</button>
+                </form>
+              </div>
+            )}
           </div>
         </div>
       </div>

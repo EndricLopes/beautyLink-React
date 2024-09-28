@@ -1,28 +1,71 @@
-/* eslint-disable no-unused-vars */
-// Sobre.jsx
-import React from 'react';
-import './Sobre.css';
+import Header from '../Header';
+import '../../styles/About.css'; // Importa o CSS específico para a página "Sobre"
 
-const Sobre = () => {
+const About = () => {
   return (
-    <div className="container-fluid d-flex justify-content-center align-items-center sobre-container">
-      <div className="card sobre-card text-center p-3">
-        <div className="row no-gutters">
-          <div className="col-md-4 d-none d-md-block sobre-image">
-            <img
-              src="https://i.pinimg.com/564x/81/0d/66/810d66dc2dcd2272a7f1ef5352a5ec55.jpg"
-              alt="Sobre"
-              className="img-fluid"
-            />
+    <div>
+      <Header />
+      <div className="about-page container">
+        <h1 className="text-center my-5">Sobre Nós</h1>
+        <div className="row">
+          <div className="col-lg-6 col-md-12 mb-4">
+            <div className="card shadow-sm">
+              <img
+                src="/src/components/Imagens/salao.jpg"
+                alt="Salão de Beleza"
+                className="card-img-top"
+              />
+              <div className="card-body">
+                <h2 className="card-title">Bem-vindo ao Beauty Link</h2>
+                <p className="card-text">
+                  No Beauty Link, nossa missão é proporcionar experiências únicas e personalizadas em cuidados de beleza.
+                  Nosso salão é especializado em uma variedade de serviços como cortes, coloração, manicure, pedicure e tratamentos faciais.
+                  Utilizamos produtos de alta qualidade e técnicas inovadoras para garantir que você se sinta ainda mais confiante.
+                </p>
+                <p className="card-text">
+                  Nossa equipe de profissionais qualificados oferece o melhor atendimento em um ambiente acolhedor. Venha nos visitar e descubra o que podemos fazer por você!
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="col-md-8 d-flex flex-column justify-content-center p-4">
-            <h3 className="card-title">Sobre Nós</h3>
-            <p className="card-text">
-              Somos uma equipe dedicada a trazer o melhor serviço para nossos clientes. Nossa missão é proporcionar excelência em tudo o que fazemos.
-            </p>
-            <p className="card-text">
-              Desde nossa fundação, focamos em qualidade e atendimento personalizado, conquistando a confiança e a satisfação de nossos clientes.
-            </p>
+          <div className="col-lg-6 col-md-12 mb-4">
+            <div className="card shadow-sm">
+              <div className="card-body text-center">
+                <h2 className="card-title">Nossa Equipe</h2>
+                <p className="card-text">
+                  Conheça nossos especialistas, prontos para transformar o seu estilo com profissionalismo e dedicação.
+                </p>
+              </div>
+              <div className="row text-center team-section px-4 py-3">
+                <div className="col-md-4 mb-3">
+                  <img
+                    src="/src/components/Imagens/equipe1.jpg"
+                    alt="Ana Clara"
+                    className="img-fluid rounded-circle team-image"
+                  />
+                  <h5 className="mt-3">Ana Clara</h5>
+                  <p>Especialista em Cabelos</p>
+                </div>
+                <div className="col-md-4 mb-3">
+                  <img
+                    src="/src/components/Imagens/equipe2.jpg"
+                    alt="Lukas Silva"
+                    className="img-fluid rounded-circle team-image"
+                  />
+                  <h5 className="mt-3">Lukas Silva</h5>
+                  <p>Barbeiro e Estilista</p>
+                </div>
+                <div className="col-md-4 mb-3">
+                  <img
+                    src="/src/components/Imagens/equipe3.jpg"
+                    alt="Juliana Santos"
+                    className="img-fluid rounded-circle team-image"
+                  />
+                  <h5 className="mt-3">Juliana Santos</h5>
+                  <p>Manicure e Pedicure</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -30,4 +73,4 @@ const Sobre = () => {
   );
 };
 
-export default Sobre;
+export default About;

@@ -1,176 +1,202 @@
-import { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
+import { useContext, useState, useEffect } from 'react';
 import { UserContext } from './UserContext';
 import axios from 'axios';
-import styles from '../../styles/Agenda.module.css';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Header';
+import styles from '../../styles/Agenda.module.css';
 
-function ConfirmAcao({ mensagem, onConfirm, onCancel }) {
-    return (
-        <div className={styles.alertConfirm}>
-            <div className={styles.modalContent}>
-                <p>{mensagem}</p>
-                <div className={styles.buttonContainer}>
-                    <button className={styles.styleConfirmaPonto} onClick={onConfirm}>Confirmar</button>
-                    <button className={styles.styleConfirmaPontoFechar} onClick={onCancel}>Fechar</button>
-                </div>
-            </div>
-        </div>
-    );
-}
+function Agendamentos() {
+  const { user } = useContext(UserContext);
+  const [atendimentos, setAtendimentos] = useState([]);
+  const [mes, setMes] = useState(new Date().getMonth() + 1); // Mês atual
+  const [ano, setAno] = useState(new Date().getFullYear()); // Ano atual
+  const [dataSelecionada, setDataSelecionada] = useState(''); // Data selecionada no calendário
+  const [diaSelecionado, setDiaSelecionado] = useState(null); // Controle do dia selecionado no calendário
+  const [tipoServico, setTipoServico] = useState('');
+  const [observacao, setObservacao] = useState('');
+  const [fkIdFuncionario, setFkIdFuncionario] = useState('');
+  const navigate = useNavigate();
 
-ConfirmAcao.propTypes = {
-    mensagem: PropTypes.string.isRequired,
-    onConfirm: PropTypes.func.isRequired,
-    onCancel: PropTypes.func.isRequired
-};
-
-function FormAgenda() {
-    const { user } = useContext(UserContext);
-    const [mostrarModal, setMostrarModal] = useState(false);
-    const [tipoServico, setTipoServico] = useState('');
-    const [dataAtendimento, setDataAtendimento] = useState('');
-    const [dataMarcacao] = useState(new Date().toISOString().split('T')[0]); // Data atual
-    const [statusAgendamento] = useState('CADASTRADO'); // Status fixo
-    const [observacao, setObservacao] = useState('');
-    const [fkIdFuncionario, setFkIdFuncionario] = useState(''); // ID do funcionário selecionado
-    const [fkIdUsuarioCliente] = useState(user ? user.id : ''); // ID do usuário logado
-    const navigate = useNavigate();
-
-    const handleFuncionarioChange = (e) => {
-        console.log('Funcionario selecionado:', e.target.value);
-        setFkIdFuncionario(e.target.value);
-    };
-
-    const AgendarAtendimento = async (e) => {
-        e.preventDefault();
-
-        // Log dos valores que serão enviados
-        console.log("Tipo de Serviço:", tipoServico);
-        console.log("Data do Atendimento:", dataAtendimento);
-        console.log("Data da Marcação:", dataMarcacao);
-        console.log("Status do Agendamento:", statusAgendamento);
-        console.log("Observação:", observacao);
-        console.log("ID do Funcionário:", fkIdFuncionario);
-        console.log("ID do Usuário Cliente:", fkIdUsuarioCliente);
-
+  useEffect(() => {
+    const buscarAtendimentos = async () => {
+      if (user) {
         try {
-            const response = await axios.post('https://beauty-link-python.vercel.app/Ponto', {
-                tipo_servico: tipoServico,
-                data_atendimento: dataAtendimento,
-                data_marcacao: dataMarcacao,
-                status_agendamento: statusAgendamento,
-                observacao: observacao,
-                fk_id_funcionario: fkIdFuncionario,
-                fk_id_usuario_cliente: fkIdUsuarioCliente
-            });
+          const response = await axios.get('https://beauty-link-python.vercel.app/Atendimento', {
+            params: { usuario: user.id }
+          });
 
-            console.log('Resposta da API:', response.data);
-            if (response.data.message === 'Atendimento cadastrado com sucesso') {
-                window.alert('Atendimento cadastrado com sucesso!');
-                navigate('/');
-            }
+          console.log('Atendimentos recebidos:', response.data); // Mostrando os atendimentos recebidos
+          setAtendimentos(response.data);
         } catch (error) {
-            console.error('Erro ao cadastrar atendimento:', error.response ? error.response.data : error.message);
-            window.alert('Erro ao cadastrar atendimento. Por favor, tente novamente.');
+          console.error('Erro ao buscar atendimentos:', error.response ? error.response.data : error.message);
+          window.alert('Erro ao buscar atendimentos. Por favor, tente novamente.');
         }
+      }
     };
 
-    return (
-        <div>
-        <Header />
-        <div className={styles.body}>
-            <div className="container d-flex justify-content-center align-items-center min-vh-100">
-                <div className={`card p-4 ${styles.card}`} style={{ width: '100%', maxWidth: '400px' }}>
-                    <h1 className="text-center mb-4">Agende seu Atendimento</h1>
-                    <form onSubmit={AgendarAtendimento}>
-                        <div className="mb-3">
-                            <label className="form-label" htmlFor="usuario">Usuário:</label>
-                            <p className={styles.fakeInput}>{user ? user.nome : 'Não autenticado'}</p>
-                        </div>
+    buscarAtendimentos();
+  }, [user]);
 
-                        <div className="mb-3">
-                            <label className="form-label" htmlFor="tipoServico">Tipo de Serviço:</label>
-                            <select
-                                className="form-control"
-                                id="tipoServico"
-                                value={tipoServico}
-                                onChange={(e) => setTipoServico(e.target.value)}
-                                required
-                            >
-                                <option value="">Selecione um serviço</option>
-                                <option value="cabelo">Cabelo</option>
-                                <option value="unha">Unha</option>
-                                <option value="maquiagem">Maquiagem</option>
-                            </select>
-                        </div>
+  const isDiaOcupado = (diaAtual) => {
+    const ocupado = atendimentos.some((atendimento) => {
+      const dataAtendimento = new Date(atendimento.DATA_ATENDIMENTO);
+      return (
+        dataAtendimento.getDate() === diaAtual.getDate() &&
+        dataAtendimento.getMonth() === diaAtual.getMonth() &&
+        dataAtendimento.getFullYear() === diaAtual.getFullYear()
+      );
+    });
 
-                        <div className="mb-3">
-                            <label className="form-label" htmlFor="dataAtendimento">Data do Atendimento:</label>
-                            <input
-                                type="date"
-                                className="form-control"
-                                id="dataAtendimento"
-                                value={dataAtendimento}
-                                onChange={(e) => setDataAtendimento(e.target.value)}
-                                required
-                            />
-                        </div>
+    if (ocupado) {
+      console.log(`Dia ${diaAtual.getDate()}/${diaAtual.getMonth() + 1}/${diaAtual.getFullYear()} está ocupado`);
+    }
 
-                        <div className="mb-3">
-                            <label className="form-label" htmlFor="dataMarcacao">Data da Marcação:</label>
-                            <input
-                                type="date"
-                                className="form-control"
-                                id="dataMarcacao"
-                                value={dataMarcacao}
-                                readOnly
-                            />
-                        </div>
-                        
-                        <div className="mb-3">
-                            <label className="form-label" htmlFor="observacao">Observação:</label>
-                            <textarea
-                                className="form-control"
-                                id="observacao"
-                                value={observacao}
-                                onChange={(e) => setObservacao(e.target.value)}
-                            />
-                        </div>
+    return ocupado;
+  };
 
-                        <div className="mb-3">
-                            <label className="form-label" htmlFor="fkIdFuncionario">Funcionário:</label>
-                            <select
-                                className="form-control"
-                                id="fkIdFuncionario"
-                                value={fkIdFuncionario}
-                                onChange={handleFuncionarioChange}
-                                required
-                            >
-                                <option value="">Selecione um funcionário</option>
-                                <option value="5">Braian</option>
-                                <option value="2">Lukas</option>
-                                <option value="3">Ana</option>
-                            </select>
-                        </div>
-                        <div className="container__ponto__button">
-                            <button type="submit" className="btn btn-primary w-100">Confirmar Agendamento</button>
-                        </div>
-                    </form>
-                </div>
+  const gerarDiasDoMes = () => {
+    const diasNoMes = new Date(ano, mes, 0).getDate();
+    return Array.from({ length: diasNoMes }, (_, i) => {
+      const dia = new Date(ano, mes - 1, i + 1);
+      const temAtendimento = isDiaOcupado(dia);
+      const isSelected = diaSelecionado === i + 1; // Verifica se é o dia selecionado
+
+      return (
+        <div
+          key={i}
+          onClick={() => {
+            setDataSelecionada(dia.toISOString().split('T')[0]);
+            setDiaSelecionado(i + 1); // Atualiza o dia selecionado
+          }}
+          className={`${styles.diaNormal} ${temAtendimento ? styles.diaOcupado : ''} ${isSelected ? styles.diaSelecionado : ''}`} // Aplica o estilo para dia ocupado e selecionado
+        >
+          {i + 1}
+        </div>
+      );
+    });
+  };
+
+  const irParaMesAnterior = () => {
+    if (mes === 1) {
+      setMes(12);
+      setAno(ano - 1);
+    } else {
+      setMes(mes - 1);
+    }
+  };
+
+  const irParaMesProximo = () => {
+    if (mes === 12) {
+      setMes(1);
+      setAno(ano + 1);
+    } else {
+      setMes(mes + 1);
+    }
+  };
+
+  const handleFuncionarioChange = (e) => {
+    setFkIdFuncionario(e.target.value);
+  };
+
+  const AgendarAtendimento = async (e) => {
+    e.preventDefault();
+    const dataMarcacao = new Date().toISOString().split('T')[0];
+    const statusAgendamento = 'CADASTRADO';
+    const fkIdUsuarioCliente = user ? user.id : '';
+
+    try {
+      const response = await axios.post('https://beauty-link-python.vercel.app/Ponto', {
+        tipo_servico: tipoServico,
+        data_atendimento: dataSelecionada,
+        data_marcacao: dataMarcacao,
+        status_agendamento: statusAgendamento,
+        observacao: observacao,
+        fk_id_funcionario: fkIdFuncionario,
+        fk_id_usuario_cliente: fkIdUsuarioCliente
+      });
+
+      if (response.data.message === 'Atendimento cadastrado com sucesso') {
+        window.alert('Atendimento cadastrado com sucesso!');
+        navigate('/');
+      }
+    } catch (error) {
+      window.alert('Erro ao cadastrar atendimento. Por favor, tente novamente.');
+    }
+  };
+
+  return (
+    <div>
+      <Header />
+      <div className={styles.body}>
+        <div className="container d-flex justify-content-center align-items-center min-vh-100">
+          <div className={`card p-4 ${styles.card}`} style={{ width: '100%', maxWidth: '600px', maxHeight: '80vh', overflowY: 'auto' }}>
+            <h2 className="text-center mb-4">Seus Agendamentos</h2>
+
+            <div className={styles.calendario}>
+              {gerarDiasDoMes()}
             </div>
 
-            {mostrarModal && (
-                <ConfirmAcao
-                    mensagem={`Você confirma este agendamento?`}
-                    onConfirm={() => { AgendarAtendimento(); setMostrarModal(false); }}
-                    onCancel={() => setMostrarModal(false)}
-                />
+            <div className="d-flex justify-content-between align-items-center my-3">
+              <button className="btn btn-primary" onClick={irParaMesAnterior}>Anterior</button>
+              <span>{`${mes}/${ano}`}</span>
+              <button className="btn btn-primary" onClick={irParaMesProximo}>Próximo</button>
+            </div>
+
+            {dataSelecionada && (
+              <div className="mt-4">
+                <h3>Agendar Atendimento para {dataSelecionada}</h3>
+                <form onSubmit={AgendarAtendimento}>
+                  <div className="mb-3">
+                    <label className="form-label" htmlFor="tipoServico">Tipo de Serviço:</label>
+                    <select
+                      className="form-control"
+                      id="tipoServico"
+                      value={tipoServico}
+                      onChange={(e) => setTipoServico(e.target.value)}
+                      required
+                    >
+                      <option value="">Selecione um serviço</option>
+                      <option value="cabelo">Cabelo</option>
+                      <option value="unha">Unha</option>
+                      <option value="maquiagem">Maquiagem</option>
+                    </select>
+                  </div>
+
+                  <div className="mb-3">
+                    <label className="form-label" htmlFor="observacao">Observação:</label>
+                    <textarea
+                      className="form-control"
+                      id="observacao"
+                      value={observacao}
+                      onChange={(e) => setObservacao(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="mb-3">
+                    <label className="form-label" htmlFor="fkIdFuncionario">Funcionário:</label>
+                    <select
+                      className="form-control"
+                      id="fkIdFuncionario"
+                      value={fkIdFuncionario}
+                      onChange={handleFuncionarioChange}
+                      required
+                    >
+                      <option value="">Selecione um funcionário</option>
+                      <option value="5">Braian</option>
+                      <option value="2">Lukas</option>
+                      <option value="3">Ana</option>
+                    </select>
+                  </div>
+
+                  <button type="submit" className="btn btn-primary w-100">Confirmar Agendamento</button>
+                </form>
+              </div>
             )}
+          </div>
         </div>
-        </div>
-    );
+      </div>
+    </div>
+  );
 }
 
-export default FormAgenda;
+export default Agendamentos;

@@ -13,6 +13,7 @@ import HomePage from './components/Pages/HomePage';
 import Produtos from './components/Pages/Produtos';
 import Agendamentos from './components/Pages/FormAgendamentos';
 import FormContato from './components/Pages/FormContato';
+import Sobre from './components/Pages/Sobre'
 
 
 const Rotas=createBrowserRouter([
@@ -47,6 +48,10 @@ const Rotas=createBrowserRouter([
         {
         path:"/Contato", 
         element:<FormContato/>
+        },
+        {
+        path:"/Sobre", 
+        element:<Sobre/>
         },
         {
         path:"/", 

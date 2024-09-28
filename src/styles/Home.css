@@ -1,57 +1,56 @@
-/* src/styles.css */
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-    background-image: url('../components/Imagens/mulherMedia.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-  }
-  
-  /* src/styles/Header.css */
-
-/* Define a cor de fundo da barra de navegação */
-.navbar {
-  background-color: rgb(39, 151, 246) !important;
-}
-
-/* Define a cor do texto dos links como branco */
-.navbar .nav-link,
-.navbar .navbar-brand,
-.navbar .nav-dropdown,
-.navbar .dropdown-item {
-  color: #fff !important;
-}
-
-/* Para garantir que os links fiquem brancos ao passar o mouse */
-.navbar .nav-link:hover,
-.navbar .navbar-brand:hover,
-.navbar .dropdown-item:hover {
-  color: #ddd !important; /* Um branco um pouco mais suave ao passar o mouse */
-}
-
 /* src/styles/Home.css */
+
+/* Corpo da página com gradiente semelhante ao das outras páginas */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: linear-gradient(90deg, rgb(84, 45, 134) 0%, rgb(100, 53, 163) 35%, rgba(0,212,255,1) 100%);
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
 
 /* Centraliza o carrossel vertical e horizontalmente */
 .carousel-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Ocupa 100% da altura da viewport */
+  height: 100vh;
+  position: relative;
 }
 
 /* Define o tamanho do carrossel */
 .custom-carousel {
-  width: 800px;  /* Ajuste conforme necessário */
-  height: 500px; /* Ajuste conforme necessário */
-  margin: 0 auto;
+  width: 80%;  /* Responsivo */
+  max-width: 1000px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Adiciona uma leve sombra */
+  border-radius: 8px; /* Bordas arredondadas */
+  overflow: hidden;
 }
 
+/* Ajuste de tamanhos das imagens no carrossel */
 .custom-carousel img {
-  object-fit: cover; /* Assegura que a imagem se ajuste sem distorção */
+  object-fit: cover;
   width: 100%;
-  height: 100%;
+  height: 500px;
 }
 
+/* Estilo das legendas do carrossel */
+.carousel-caption h5 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+}
+
+.carousel-caption p {
+  font-size: 1.2rem;
+  color: white;
+}
+
+/* Estilo para os botões de controle do carrossel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(2, 0, 36, 0.7); /* Fundo mais escuro nos botões */
+  border-radius: 50%;
+  padding: 15px;
+}
