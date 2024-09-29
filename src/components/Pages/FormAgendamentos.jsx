@@ -15,6 +15,7 @@ function Agendamentos() {
   const [tipoServico, setTipoServico] = useState('');
   const [observacao, setObservacao] = useState('');
   const [fkIdFuncionario, setFkIdFuncionario] = useState('');
+  const [horarioAtendimento, setHorarioAtendimento] = useState(''); // Novo estado para o horário
   const navigate = useNavigate();
 
   // Redireciona para a página de login se o usuário não estiver logado
@@ -44,21 +45,17 @@ function Agendamentos() {
     buscarAtendimentos();
   }, [user]);
 
-  const isDiaOcupado = (diaAtual) => {
-    const ocupado = atendimentos.some((atendimento) => {
+  const isDiaOcupado = (diaAtual, horario) => {
+    return atendimentos.some((atendimento) => {
       const dataAtendimento = new Date(atendimento.DATA_ATENDIMENTO);
+      const horarioAtendimento = atendimento.HORARIO_ATENDIMENTO; // Verificação do horário
       return (
         dataAtendimento.getDate() === diaAtual.getDate() &&
         dataAtendimento.getMonth() === diaAtual.getMonth() &&
-        dataAtendimento.getFullYear() === diaAtual.getFullYear()
+        dataAtendimento.getFullYear() === diaAtual.getFullYear() &&
+        horarioAtendimento === horario // Comparação de horários
       );
     });
-
-    if (ocupado) {
-      console.log(`Dia ${diaAtual.getDate()}/${diaAtual.getMonth() + 1}/${diaAtual.getFullYear()} está ocupado`);
-    }
-
-    return ocupado;
   };
 
   const gerarDiasDoMes = () => {
@@ -115,6 +112,7 @@ function Agendamentos() {
       const response = await axios.post('https://beauty-link-python.vercel.app/Ponto', {
         tipo_servico: tipoServico,
         data_atendimento: dataSelecionada,
+        horario_atendimento: horarioAtendimento, // Inclua o horário aqui
         data_marcacao: dataMarcacao,
         status_agendamento: statusAgendamento,
         observacao: observacao,
@@ -192,6 +190,27 @@ function Agendamentos() {
                       <option value="5">Braian</option>
                       <option value="2">Lukas</option>
                       <option value="3">Ana</option>
+                    </select>
+                  </div>
+
+                  <div className="mb-3">
+                    <label className="form-label" htmlFor="horarioAtendimento">Horário do Atendimento:</label>
+                    <select
+                      className="form-control"
+                      id="horarioAtendimento"
+                      value={horarioAtendimento}
+                      onChange={(e) => setHorarioAtendimento(e.target.value)}
+                      required
+                    >
+                      <option value="">Selecione um horário</option>
+                      <option value="09:00">09:00</option>
+                      <option value="10:00">10:00</option>
+                      <option value="11:00">11:00</option>
+                      <option value="12:00">12:00</option>
+                      <option value="13:00">13:00</option>
+                      <option value="14:00">14:00</option>
+                      <option value="15:00">15:00</option>
+                      <option value="16:00">16:00</option>
                     </select>
                   </div>
 
