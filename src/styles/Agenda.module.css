@@ -32,12 +32,56 @@
 }
 
 .diaOcupado {
-    background-color: green; /* Verde para dias com atendimento já marcado */
+    background-color: red !important; /* Vermelho para dias com atendimento já marcado */
     color: white;
     border: 1px solid #ccc;
 }
 
 .diaSelecionado {
-    background-color: blue; /* Azul para o dia selecionado */
+    background-color: blue !important; /* Azul para o dia selecionado */
     color: white;
+}
+
+.calendario {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    padding: 20px;
+  }
+  
+  .dia {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightgray;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  
+  .dia.selecionado {
+    background-color: blue;
+    color: white;
+  }
+
+  .diaNormal {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.diaOcupado {
+    background-color: red !important;
+    color: white;
+    border: 1px solid #ccc;
+}
+
+.diaParcialmenteOcupado {
+    background-color: orange !important; /* Cor diferente para dias parcialmente ocupados */
+    color: white;
+    border: 1px solid #ccc;
 }
