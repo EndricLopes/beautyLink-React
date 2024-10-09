@@ -52,7 +52,7 @@ const About = () => {
                     alt="Ana Clara"
                     className="img-fluid rounded-circle team-image"
                     />
-                  <h5 className="mt-3">Ana Clara</h5>
+                  <h5 className="mt-3">Braian Lincoln</h5>
                   <p>Especialista em Cabelos</p>
                 </div>
                 <div className="col-md-4 mb-3">
@@ -70,7 +70,7 @@ const About = () => {
                     alt="Juliana Santos"
                     className="img-fluid rounded-circle team-image"
                     />
-                  <h5 className="mt-3">Juliana Santos</h5>
+                  <h5 className="mt-3">Ana Santos</h5>
                   <p>Manicure e Pedicure</p>
                 </div>
               </div>

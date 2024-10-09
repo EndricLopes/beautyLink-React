@@ -9,24 +9,26 @@ import unha from '../Imagens/unha.jpg';
 import cabelo from '../Imagens/cabelo.jpg';
 
 function MeusAtendimentos() {
-  const { user } = useContext(UserContext);
-  const [atendimentos, setAtendimentos] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { user } = useContext(UserContext); // Obtém o usuário logado do contexto
+  const [atendimentos, setAtendimentos] = useState([]); // Estado para armazenar os atendimentos
+  const [loading, setLoading] = useState(true); // Estado de carregamento
 
   useEffect(() => {
     if (user) {
+      // Faz a requisição para a API para buscar os atendimentos do usuário logado
       axios.get(`https://beauty-link-python.vercel.app/MeusAtendimentos?id_usuario=${user.id}`)
         .then(response => {
           setAtendimentos(response.data);
-          setLoading(false);
+          setLoading(false); // Desativa o estado de carregamento
         })
         .catch(error => {
           console.error('Erro ao buscar atendimentos:', error);
-          setLoading(false);
+          setLoading(false); // Desativa o estado de carregamento em caso de erro
         });
     }
   }, [user]);
 
+  // Função para obter a imagem associada ao serviço
   const getImageForService = (service) => {
     const lowerCaseService = service.trim().toLowerCase();
 
@@ -42,6 +44,7 @@ function MeusAtendimentos() {
   };
 
   if (loading) {
+    // Exibe um indicador de carregamento enquanto os dados estão sendo buscados
     return (
       <div>
         <Header />
@@ -64,7 +67,7 @@ function MeusAtendimentos() {
       <Header />
       <div className={styles.body}>
         <div className="container mt-4">
-          <h2 className="text-center">Meus Atendimentos</h2>
+          <h2 className="text-center bg-light">Meus Atendimentos</h2>
 
           {atendimentos.length === 0 ? (
             <p className="text-center mt-4">Você não possui nenhum atendimento marcado.</p>
@@ -75,10 +78,10 @@ function MeusAtendimentos() {
                   <div className="card mb-3 h-100">
                     <div className="row g-0">
                       <div className="col-md-4">
-                        {/* Ajustes de classes para garantir que a imagem respeite os limites do card */}
+                        {/* Imagem do serviço ajustada com as classes do Bootstrap */}
                         <img
                           src={getImageForService(atendimento.TIPO_SERVICO)}
-                          className="img-fluid rounded-start card-img-fit" // Adicionamos classes aqui
+                          className="img-fluid rounded-start card-img-fit"
                           alt={atendimento.TIPO_SERVICO}
                         />
                       </div>
@@ -87,6 +90,8 @@ function MeusAtendimentos() {
                           <h5 className="card-title">{atendimento.TIPO_SERVICO}</h5>
                           <p className="card-text">Data do Atendimento: <br />{atendimento.DATA_ATENDIMENTO}</p>
                           <p className="card-text"><small className="text-muted">Status: {atendimento.STATUS_AGENDAMENTO}</small></p>
+                          {/* Exibindo o nome do funcionário */}
+                          <p className="card-text"><small className="text-muted">Funcionário: {atendimento.FUNCIONARIO}</small></p>
                         </div>
                       </div>
                     </div>
