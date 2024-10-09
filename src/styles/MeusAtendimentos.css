@@ -1,0 +1,59 @@
+/* Estilos modernos para a tabela */
+.table-modern {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.thead-dark {
+    background-color: #343a40;
+    color: white;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+.table-bordered th, .table-bordered td {
+    border: 1px solid #dee2e6;
+    vertical-align: middle;
+}
+
+/* Labels de status com cores diferentes */
+.status-label {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.status-label.cadastrado {
+    background-color: #28a745;
+    color: white;
+}
+
+.status-label.cancelado {
+    background-color: #dc3545;
+    color: white;
+}
+
+.status-label.pendente {
+    background-color: #ffc107;
+    color: black;
+}
+
+  .img-fit {
+    object-fit: cover; /* Faz com que a imagem cubra o espaço disponível */
+    height: 100%; /* Garante que a altura seja ajustada corretamente */
+    width: 100%; /* Garante que a imagem não ultrapasse a largura */
+    border-radius: 0; /* Remove cantos arredondados da imagem, se necessário */
+  }
+  
+  .card-img-fit {
+    object-fit: cover; /* A imagem irá preencher o espaço disponível sem distorcer */
+    height: 100%; /* A imagem ocupará toda a altura da coluna */
+    width: 100%; /* A imagem ocupará toda a largura da coluna */
+    border-radius: 0; /* Remove qualquer arredondamento nas bordas para combinar com o card */
+  }
+  

@@ -9,6 +9,7 @@ function FormLogin() {
     const { setUser } = useContext(UserContext);
     const [usuario, setUsuario] = useState('');
     const [senha, setSenha] = useState('');
+    const [loading, setLoading] = useState(false); // Estado para indicar carregamento
     const navigate = useNavigate();
 
     // Função de login
@@ -19,6 +20,8 @@ function FormLogin() {
             window.alert('Por favor, insira o usuário e a senha.');
             return;
         }
+
+        setLoading(true); // Ativa o estado de carregamento
 
         try {
             const response = await axios.post('https://beauty-link-python.vercel.app/Login', {
@@ -33,7 +36,7 @@ function FormLogin() {
                     nome: usuario,
                     id: response.data.id_usuario
                 };
-                
+
                 // Definindo o usuário no contexto apenas após o login ser bem-sucedido
                 setUser(userData);
                 // Armazenando o usuário no localStorage
@@ -47,6 +50,8 @@ function FormLogin() {
         } catch (error) {
             console.error('Erro ao fazer login:', error);
             window.alert('Usuário ou senha incorretos. Por favor, tente novamente.');
+        } finally {
+            setLoading(false); // Desativa o estado de carregamento
         }
     };
 
@@ -58,7 +63,7 @@ function FormLogin() {
 
     return (
         <div>
-            <Header/>
+            <Header />
             <div className={styles.body}>
                 <div className="container d-flex justify-content-center align-items-center min-vh-100">
                     <div className="card p-4" style={{ width: '100%', maxWidth: '400px' }}>
@@ -90,7 +95,14 @@ function FormLogin() {
                                     required
                                 />
                             </div>
-                            <button type="submit" className="btn btn-primary w-100">Entrar</button>
+                            <button type="submit" className="btn btn-primary w-100" disabled={loading}>
+                                {loading ? (
+                                    <>
+                                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        Carregando...
+                                    </>
+                                ) : 'Entrar'}
+                            </button>
                             <div className="mt-3 text-center">
                                 <p className="mb-0">Ainda não possui cadastro?</p>
                                 <button type="button" className="btn btn-secondary mt-2" onClick={handleCadastro}>

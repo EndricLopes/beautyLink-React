@@ -1,4 +1,3 @@
-import React from 'react';
 import '../../styles/Produtos.css';
 import Header from '../Header'; // Importação do cabeçalho
 
@@ -31,7 +30,7 @@ const Produtos = () => {
 };
 
 // Componente para exibir um produto
-const Produto = ({ produto }) => {
+const Produto = ({produto}) => {
   // Verifica se o produto está definido corretamente
   if (!produto || !produto.imagem || !produto.nome || typeof produto.quantidade === 'undefined') {
     return <div>Produto inválido</div>;

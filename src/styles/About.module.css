@@ -1,0 +1,67 @@
+.about-page {
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+}
+
+.jumbotron {
+  padding: 4rem 2rem;
+}
+
+.jumbotron .display-4 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.jumbotron .lead {
+  font-size: 1.25rem;
+  color: #f8f9fa;
+}
+
+.card {
+  border: none;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: rgb(100, 53, 163);
+  margin-bottom: 20px;
+}
+
+.card-text {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #555;
+}
+
+.team-section {
+  margin-top: 20px;
+}
+
+.team-section h5 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.team-section p {
+  font-size: 1rem;
+  color: #777;
+}
+
+.team-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 3px solid rgba(0, 212, 255, 1);
+}
+
+@media (min-width: 992px) {
+  .team-image {
+    width: 120px;
+    height: 120px;
+  }
+}

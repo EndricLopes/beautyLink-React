@@ -135,7 +135,7 @@ function Agendamentos() {
       <div className={styles.body}>
         <div className="container d-flex justify-content-center align-items-center min-vh-100">
           <div className={`card p-4 ${styles.card}`} style={{ width: '100%', maxWidth: '600px', maxHeight: '80vh', overflowY: 'auto' }}>
-            <h2 className="text-center mb-4">Seus Agendamentos</h2>
+            <h2 className="text-center mb-4">Agenda</h2>
 
             <div className={styles.calendario}>
               {gerarDiasDoMes()}

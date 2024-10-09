@@ -1,4 +1,3 @@
-// src/components/Header.js
 import '../styles/Header.css'; // Importa o CSS do cabeçalho
 import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
@@ -40,6 +39,16 @@ const Header = () => {
     navigate('/Sobre');
   };
 
+  const linkMeusAtendimentos = () => {
+    if (!user) {
+      // Se não houver um usuário logado, redireciona para a página de login
+      navigate('/Login');
+    } else {
+      // Se o usuário estiver logado, redireciona para Meus Atendimentos
+      navigate('/MeusAtendimentos');
+    }
+  };
+
   const handleLogout = () => {
     // Remove o usuário do contexto e limpa o localStorage
     setUser(null);
@@ -55,21 +64,20 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mx-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
+              <Nav.Link href="#home" onClick={linkHome}>Home</Nav.Link>
               <Nav.Link href="#about" onClick={linkSobre}>Sobre</Nav.Link>
-              <Nav.Link href="#contact" onClick={linkAgendamento}>Agendamento</Nav.Link>
+              <Nav.Link href="#contact" onClick={linkAgendamento}>Agenda</Nav.Link>
+              <Nav.Link href="#contact" onClick={linkMeusAtendimentos}>Meus Atendimentos</Nav.Link>
               <Nav.Link href="#contact" onClick={linkContato}>Contatos</Nav.Link>
-              <Nav.Link href="#link">Equipes</Nav.Link>
-              <Nav.Link href="#link" onClick={linkProduto}>Estoque</Nav.Link>
+              <Nav.Link href="#link" onClick={linkProduto}>Loja</Nav.Link>
 
-              <NavDropdown title="Conecte-se" id="basic-nav-dropdown">
-                {!user && (
-                  <>
-                    <NavDropdown.Item onClick={linkLogin}>Login</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.3" onClick={linkCadastro}>Cadastro</NavDropdown.Item>
-                  </>
-                )}
-              </NavDropdown>
+              {/* Mostra "Conecte-se" apenas se o usuário não estiver logado */}
+              {!user && (
+                <NavDropdown title="Conecte-se" id="basic-nav-dropdown">
+                  <NavDropdown.Item onClick={linkLogin}>Login</NavDropdown.Item>
+                  <NavDropdown.Item href="#action/3.3" onClick={linkCadastro}>Cadastro</NavDropdown.Item>
+                </NavDropdown>
+              )}
 
               {/* Mostra o botão de logout apenas se o usuário estiver logado */}
               {user && (

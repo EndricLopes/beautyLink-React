@@ -13,7 +13,8 @@ import HomePage from './components/Pages/HomePage';
 import Produtos from './components/Pages/Produtos';
 import Agendamentos from './components/Pages/FormAgendamentos';
 import FormContato from './components/Pages/FormContato';
-import Sobre from './components/Pages/Sobre'
+import Sobre from './components/Pages/FormSobre'
+import MeusAtendimentos from './components/Pages/MeusAtendimentos';
 
 
 const Rotas=createBrowserRouter([
@@ -52,6 +53,10 @@ const Rotas=createBrowserRouter([
         {
         path:"/Sobre", 
         element:<Sobre/>
+        },
+        {
+        path:"/MeusAtendimentos", 
+        element:<MeusAtendimentos/>
         },
         {
         path:"/", 
