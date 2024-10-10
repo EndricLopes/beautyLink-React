@@ -30,7 +30,14 @@ const Produtos = () => {
 };
 
 // Componente para exibir um produto
-const Produto = ({produto}) => {
+const Produto = ({ produto }) => {
+  // Função para redirecionar para o WhatsApp
+  const handleComprarClick = () => {
+    const message = `Olá, tenho interesse no produto "${produto.nome}" que está disponível no site da BeautyLink!`;
+    const whatsappUrl = `https://wa.me/5561994662839?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   // Verifica se o produto está definido corretamente
   if (!produto || !produto.imagem || !produto.nome || typeof produto.quantidade === 'undefined') {
     return <div>Produto inválido</div>;
@@ -43,7 +50,7 @@ const Produto = ({produto}) => {
         <div className="card-body">
           <h5 className="card-title">{produto.nome}</h5>
           <p className="card-text">Quantidade em Estoque: {produto.quantidade}</p>
-          <button className="btn btn-primary">Comprar</button>
+          <button className="btn btn-primary" onClick={handleComprarClick}>Comprar</button>
         </div>
       </div>
     </div>
