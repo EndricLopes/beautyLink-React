@@ -34,7 +34,7 @@ const Produto = ({ produto }) => {
   // Função para redirecionar para o WhatsApp
   const handleComprarClick = () => {
     const message = `Olá, tenho interesse no produto "${produto.nome}" que está disponível no site da BeautyLink!`;
-    const whatsappUrl = `https://wa.me/5561994662839?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/5561994662893?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
