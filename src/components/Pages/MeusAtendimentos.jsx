@@ -9,26 +9,24 @@ import unha from '../Imagens/unha.jpg';
 import cabelo from '../Imagens/cabelo.jpg';
 
 function MeusAtendimentos() {
-  const { user } = useContext(UserContext); // Obtém o usuário logado do contexto
-  const [atendimentos, setAtendimentos] = useState([]); // Estado para armazenar os atendimentos
-  const [loading, setLoading] = useState(true); // Estado de carregamento
+  const { user } = useContext(UserContext);
+  const [atendimentos, setAtendimentos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (user) {
-      // Faz a requisição para a API para buscar os atendimentos do usuário logado
       axios.get(`https://beauty-link-python.vercel.app/MeusAtendimentos?id_usuario=${user.id}`)
         .then(response => {
           setAtendimentos(response.data);
-          setLoading(false); // Desativa o estado de carregamento
+          setLoading(false);
         })
         .catch(error => {
           console.error('Erro ao buscar atendimentos:', error);
-          setLoading(false); // Desativa o estado de carregamento em caso de erro
+          setLoading(false);
         });
     }
   }, [user]);
 
-  // Função para obter a imagem associada ao serviço
   const getImageForService = (service) => {
     const lowerCaseService = service.trim().toLowerCase();
 
@@ -43,8 +41,27 @@ function MeusAtendimentos() {
     }
   };
 
+  const cancelarAtendimento = async (id) => {
+    try {
+      const response = await axios.put(`https://beauty-link-python.vercel.app/CancelarAtendimento`, { id });
+      if (response.data.message === 'Atendimento cancelado com sucesso') {
+        // Atualizar a lista de atendimentos após o cancelamento
+        setAtendimentos(atendimentos.map(atendimento =>
+          atendimento.ID_AGENDA === id
+            ? { ...atendimento, STATUS_AGENDAMENTO: 'CANCELADO' }
+            : atendimento
+        ));
+        alert('Atendimento cancelado com sucesso.');
+      } else {
+        alert('Erro ao cancelar atendimento.');
+      }
+    } catch (error) {
+      console.error('Erro ao cancelar atendimento:', error);
+      alert('Erro ao cancelar atendimento. Por favor, tente novamente.');
+    }
+  };
+
   if (loading) {
-    // Exibe um indicador de carregamento enquanto os dados estão sendo buscados
     return (
       <div>
         <Header />
@@ -78,7 +95,6 @@ function MeusAtendimentos() {
                   <div className="card mb-3 h-100">
                     <div className="row g-0">
                       <div className="col-md-4">
-                        {/* Imagem do serviço ajustada com as classes do Bootstrap */}
                         <img
                           src={getImageForService(atendimento.TIPO_SERVICO)}
                           className="img-fluid rounded-start card-img-fit"
@@ -90,8 +106,10 @@ function MeusAtendimentos() {
                           <h5 className="card-title">{atendimento.TIPO_SERVICO}</h5>
                           <p className="card-text">Data do Atendimento: <br />{atendimento.DATA_ATENDIMENTO}</p>
                           <p className="card-text"><small className="text-muted">Status: {atendimento.STATUS_AGENDAMENTO}</small></p>
-                          {/* Exibindo o nome do funcionário */}
                           <p className="card-text"><small className="text-muted">Funcionário: {atendimento.FUNCIONARIO}</small></p>
+                          {atendimento.STATUS_AGENDAMENTO !== 'CANCELADO' && (
+                            <button className="btn btn-danger mt-2" onClick={() => cancelarAtendimento(atendimento.ID_AGENDA)}>Cancelar</button>
+                          )}
                         </div>
                       </div>
                     </div>
